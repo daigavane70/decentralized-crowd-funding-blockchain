@@ -73,7 +73,7 @@ const navBar = [
     key: "home",
     link: "/",
   },
-  { label: "My Startups", key: "mystartups", link: "/mystartups" },
+  { label: "My Investments", key: "mystartups", link: "/mystartups" },
   { label: "Profile", key: "profile", link: "/profile" },
 ];
 
