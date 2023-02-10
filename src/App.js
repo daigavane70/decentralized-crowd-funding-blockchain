@@ -8,6 +8,9 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import MyStartups from "./pages/MyStartups";
 import Investor from "./pages/Investor";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import CreateInvestor from "./pages/CreateInvestor";
 
 function App() {
   const navigate = useNavigate();
@@ -58,6 +61,9 @@ function App() {
               element={<MyStartups></MyStartups>}
             ></Route>
             <Route path="/investorprofile" element={<Investor></Investor>}></Route>
+            <Route path="/login" element={<Login></Login>}></Route>
+            <Route path="/signup" element={<SignUp></SignUp>}></Route>
+            <Route path="/createInvestorProfile" element={<CreateInvestor></CreateInvestor>}></Route>
           </Routes>
         </Content>
         <Footer style={{ textAlign: "center" }}>
@@ -78,6 +84,9 @@ const navBar = [
   { label: "My Investments", key: "mystartups", link: "/mystartups" },
   { label: "Profile", key: "profile", link: "/profile" },
   { label: "Investor Profile", key: "investorProfile", link: "/investorprofile" },
+  { label: "Login", key: "login", link: "/login" },
+  { label: "Sign Up", key: "signUp", link: "/signup" },
+  { label: "Create Investor Profile", key: "createInvestorProfile", link: "/createinvestorprofile" },
 ];
 
 export default App;
