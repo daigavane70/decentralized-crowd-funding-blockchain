@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import MyStartups from "./pages/MyStartups";
+import Investor from "./pages/Investor";
 
 function App() {
   const navigate = useNavigate();
@@ -56,6 +57,7 @@ function App() {
               path="/mystartups"
               element={<MyStartups></MyStartups>}
             ></Route>
+            <Route path="/investorprofile" element={<Investor></Investor>}></Route>
           </Routes>
         </Content>
         <Footer style={{ textAlign: "center" }}>
@@ -75,6 +77,7 @@ const navBar = [
   },
   { label: "My Investments", key: "mystartups", link: "/mystartups" },
   { label: "Profile", key: "profile", link: "/profile" },
+  { label: "Investor Profile", key: "investorProfile", link: "/investorprofile" },
 ];
 
 export default App;
