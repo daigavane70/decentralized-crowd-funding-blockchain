@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import MyStartups from "./pages/MyStartups";
+import InvestorProfile from "./pages/InvestorProfile";
 
 function App() {
   const navigate = useNavigate();
@@ -23,7 +24,12 @@ function App() {
           bottom: 0,
         }}
       >
-        <div className="p-4 text-white">Logo</div>
+        <div className="text-white d-flex justify-center w-full h-[60px] p-2">
+          <img
+            className="h-full mx-auto"
+            src={"https://www.svgrepo.com/download/195318/investment.svg"}
+          ></img>
+        </div>
         <Menu
           mode="inline"
           theme="dark"
@@ -39,8 +45,11 @@ function App() {
         ></Menu>
       </Sider>
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
-        <Header className="site-layout-background flex" style={{ padding: 0 }}>
-          <div className="text-3xl my-auto text-cyan-400">
+        <Header
+          className="site-layout-background flex"
+          style={{ padding: 0, height: "60px" }}
+        >
+          <div className="text-3xl my-auto text-white font-bold">
             Crowd Funding Application
           </div>
         </Header>
@@ -51,7 +60,11 @@ function App() {
           ></div>
           <Routes>
             <Route path="/" element={<Home></Home>}></Route>
-            <Route path="/profile" element={<Profile></Profile>}></Route>
+            <Route path="/profile/admin" element={<Profile></Profile>}></Route>
+            <Route
+              path="/profile/investor"
+              element={<InvestorProfile></InvestorProfile>}
+            ></Route>
             <Route
               path="/mystartups"
               element={<MyStartups></MyStartups>}
@@ -73,8 +86,14 @@ const navBar = [
     key: "home",
     link: "/",
   },
-  { label: "My Investments", key: "mystartups", link: "/mystartups" },
-  { label: "Profile", key: "profile", link: "/profile" },
+  { label: "My Investments", key: "myStartups", link: "/mystartups" },
+  { label: "Startup Details", key: "startupDetails", link: "/startups/:id" },
+  {
+    label: "Investor Profile",
+    key: "investorProfile",
+    link: "/profile/investor",
+  },
+  { label: "Profile", key: "profile", link: "/profile/admin" },
 ];
 
 export default App;
