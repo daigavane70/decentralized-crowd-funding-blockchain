@@ -11,13 +11,14 @@ const tailLayout = {
 const CreateInvestor = () => {
   const [data, setData] = useState({});
   const [form] = Form.useForm();
+  const formRef = React.useRef(null);
   const { Option } = Select;
 
   const onFinish = (values) => {
     console.log(values);
   };
   const onReset = () => {
-    form.resetFields();
+    formRef.current?.resetFields();
   };
 
   const onFill = () => {
@@ -43,7 +44,7 @@ const CreateInvestor = () => {
   };
 
   return (
-    <div className="text-center space-y-2">
+    <div className="text-center space-y-2 mt-40">
       <h1 className=" text-4xl font-bold mb-10">Create campaign manager</h1>
       <Form
         className="w-[500px] mx-auto border p-4 py-8 bg-gray-50 rounded-lg"
@@ -52,10 +53,11 @@ const CreateInvestor = () => {
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
+        initialValues={{ remember: true, gender: "male" }}
         onFinish={() => {}}
         onFinishFailed={() => {}}
         autoComplete="off"
+        ref={formRef}
       >
         <Form.Item
           label="Name"
@@ -88,7 +90,6 @@ const CreateInvestor = () => {
             placeholder="Select your gender"
             onChange={onGenderChange}
             allowClear
-            defaultValue={"male"}
           >
             <Option value="male">male</Option>
             <Option value="female">female</Option>

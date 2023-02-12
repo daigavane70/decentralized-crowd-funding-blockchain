@@ -59,13 +59,13 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container text-left">
       {Object.keys(formErrors).length === 0 && isSubmit && (
         <div className="ui message success">Signed Up successfully</div>
       )}
 
       <form onSubmit={handleSubmit}>
-        <h1>Sign Up Form</h1>
+        <h1>Create investor profile</h1>
         <div className="ui divider"></div>
         <div className="ui form">
           <div className="field">

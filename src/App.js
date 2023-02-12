@@ -2,20 +2,23 @@ import "./App.css";
 import { Layout, Menu } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+import ManagerProfile from "./pages/ManagerProfile";
 import MyStartups from "./pages/MyStartups";
 import Investor from "./pages/Investor";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import CreateCampaignManager from "./pages/CreateCampaignManager";
+import Welcome from "./pages/Welcome";
 
 function App() {
   const navigate = useNavigate();
 
-  return (
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  return loggedIn ? (
     <Layout hasSider>
       <Sider
         style={{
@@ -47,7 +50,7 @@ function App() {
           })}
         ></Menu>
       </Sider>
-      <Layout className="site-layout" style={{ marginLeft: 200 }}>
+      <Layout className="site-layout bg-white" style={{ marginLeft: 200 }}>
         <Header
           className="site-layout-background flex"
           style={{ padding: 0, height: "60px" }}
@@ -56,14 +59,20 @@ function App() {
             Crowd Funding Application
           </div>
         </Header>
-        <Content style={{ margin: "0px 16px 0", overflow: "initial" }}>
+        <Content
+          style={{ margin: "0px 16px 0", overflow: "initial" }}
+          className="pb-12 h-screen"
+        >
           <div
             className="site-layout-background"
             style={{ padding: 24, textAlign: "center" }}
           ></div>
           <Routes>
             <Route path="/" element={<Home></Home>}></Route>
-            <Route path="/profile/admin" element={<Profile></Profile>}></Route>
+            <Route
+              path="/managerProfile"
+              element={<ManagerProfile></ManagerProfile>}
+            ></Route>
             <Route
               path="/mystartups"
               element={<MyStartups></MyStartups>}
@@ -73,11 +82,6 @@ function App() {
               element={<Investor></Investor>}
             ></Route>
             <Route path="/login" element={<Login></Login>}></Route>
-            <Route path="/signup" element={<SignUp></SignUp>}></Route>
-            <Route
-              path="/createCampaignManagerProfile"
-              element={<CreateCampaignManager></CreateCampaignManager>}
-            ></Route>
           </Routes>
         </Content>
         <Footer style={{ textAlign: "center" }}>
@@ -86,6 +90,20 @@ function App() {
         </Footer>
       </Layout>
     </Layout>
+  ) : (
+    <div className="d-flex justify-center text-center h-screen w-full">
+      <Routes>
+        <Route
+          path="/"
+          element={<Welcome setLoggedIn={setLoggedIn}></Welcome>}
+        ></Route>
+        <Route
+          path="/createCampaignManagerProfile"
+          element={<CreateCampaignManager></CreateCampaignManager>}
+        ></Route>
+        <Route path="/createInvestor" element={<SignUp></SignUp>}></Route>
+      </Routes>
+    </div>
   );
 }
 
@@ -96,14 +114,13 @@ const navBar = [
     link: "/",
   },
   { label: "My Investments", key: "mystartups", link: "/mystartups" },
-  { label: "Profile", key: "profile", link: "/profile" },
+  { label: "Manager profile", key: "managerProfile", link: "/managerProfile" },
   {
     label: "Investor Profile",
     key: "investorProfile",
     link: "/investorprofile",
   },
   { label: "Login", key: "login", link: "/login" },
-  { label: "Sign Up", key: "signUp", link: "/signup" },
   {
     label: "Create campaign manager",
     key: "createCampaignManager",
