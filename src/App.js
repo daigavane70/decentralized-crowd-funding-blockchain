@@ -10,7 +10,7 @@ import MyStartups from "./pages/MyStartups";
 import Investor from "./pages/Investor";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import CreateInvestor from "./pages/CreateInvestor";
+import CreateCampaignManager from "./pages/CreateCampaignManager";
 
 function App() {
   const navigate = useNavigate();
@@ -65,10 +65,6 @@ function App() {
             <Route path="/" element={<Home></Home>}></Route>
             <Route path="/profile/admin" element={<Profile></Profile>}></Route>
             <Route
-              path="/profile/investor"
-              element={<InvestorProfile></InvestorProfile>}
-            ></Route>
-            <Route
               path="/mystartups"
               element={<MyStartups></MyStartups>}
             ></Route>
@@ -79,8 +75,8 @@ function App() {
             <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/signup" element={<SignUp></SignUp>}></Route>
             <Route
-              path="/createInvestorProfile"
-              element={<CreateInvestor></CreateInvestor>}
+              path="/createCampaignManagerProfile"
+              element={<CreateCampaignManager></CreateCampaignManager>}
             ></Route>
           </Routes>
         </Content>
@@ -109,9 +105,9 @@ const navBar = [
   { label: "Login", key: "login", link: "/login" },
   { label: "Sign Up", key: "signUp", link: "/signup" },
   {
-    label: "Create Investor Profile",
-    key: "createInvestorProfile",
-    link: "/createinvestorprofile",
+    label: "Create campaign manager",
+    key: "createCampaignManager",
+    link: "/createCampaignManagerProfile",
   },
 ];
 
