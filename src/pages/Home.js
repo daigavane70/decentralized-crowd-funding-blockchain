@@ -1,9 +1,11 @@
 import { Avatar, Button, Card, Divider, Drawer, Input, List } from "antd";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [investDrawerOpen, setInvestDrawerOpen] = useState(false);
   const [currentStatupDetails, setCurrentStatupDetails] = useState({});
+  const [startups, setStartups] = useState(allStartups);
 
   const openInvest = (data) => {
     setInvestDrawerOpen(true);
@@ -13,6 +15,8 @@ export default function Home() {
   const closeIvest = () => {
     setInvestDrawerOpen(false);
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="">
@@ -33,12 +37,19 @@ export default function Home() {
           </div>
         </Divider>
         <List className=" max-h-[500px] overflow-auto ">
-          {listItems.map((item) => {
+          {startups.map((item, _id) => {
             return (
               <List.Item className="">
                 <List.Item.Meta
                   avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                  title={item.title}
+                  title={
+                    <div
+                      className=" cursor-pointer font-bold text-xl"
+                      onClick={() => navigate("/startup/" + item._id)}
+                    >
+                      {item.title}
+                    </div>
+                  }
                   description={
                     <div>
                       <p className="mb-2">{item.description}</p>
@@ -138,7 +149,7 @@ export default function Home() {
   );
 }
 
-const listItems = [
+const allStartups = [
   {
     title: "Skidoo",
     valuation: 1116448,

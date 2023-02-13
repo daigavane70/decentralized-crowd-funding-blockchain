@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import CreateCampaignManager from "./pages/CreateCampaignManager";
 import Welcome from "./pages/Welcome";
+import StartupDetails from "./pages/StartupDetails";
 
 function App() {
   const navigate = useNavigate();
@@ -82,6 +83,10 @@ function App() {
               element={<Investor></Investor>}
             ></Route>
             <Route path="/login" element={<Login></Login>}></Route>
+            <Route
+              path="/startup/{id}"
+              element={<StartupDetails></StartupDetails>}
+            ></Route>
           </Routes>
         </Content>
         <Footer style={{ textAlign: "center" }}>
@@ -121,11 +126,11 @@ const navBar = [
     link: "/investorprofile",
   },
   { label: "Login", key: "login", link: "/login" },
-  {
-    label: "Create campaign manager",
-    key: "createCampaignManager",
-    link: "/createCampaignManagerProfile",
-  },
+  // {
+  //   label: "Create campaign manager",
+  //   key: "createCampaignManager",
+  //   link: "/createCampaignManagerProfile",
+  // },
 ];
 
 export default App;

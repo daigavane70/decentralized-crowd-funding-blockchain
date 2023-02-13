@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Radio, Space, Table, Tag } from "antd";
+import { Radio, Space, Table, Tag, Avatar } from "antd";
 import { Descriptions } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 
 const topOptions = [
   {
@@ -127,39 +128,37 @@ const Investor = ({ investorId }) => {
 
   return (
     <div className="investor-profile">
-      <h2>name</h2>
-      {/* <h1>{investor.name}</h1> */}
-      <p>Email: {investor.email}</p>
-      <p>Id: {investor.id}</p>
-      {/* <Descriptions title="User Info">
-            <Descriptions.Item label="UserName">bcs</Descriptions.Item>
-            <Descriptions.Item label="Email">{investor.email}</Descriptions.Item>
-            <Descriptions.Item label="Id">{investor.id}</Descriptions.Item>s
-        </Descriptions> */}
-
+      <div className="text-4xl mb-4 font-bold border-b pb-2 text-gray-400">
+        Investor Profile
+      </div>
+      <div className="grid grid-cols-5 p-4 rounded-xl py-4 border">
+        <Space wrap size={16}>
+          <Avatar size={64} icon={<UserOutlined />} />
+        </Space>
+        <div className="grid grid-cols-3 col-span-4">
+          <div className="flex space-x-3">
+            <div className=" text-slate-500">Name: </div>
+            <div className=" font-bold">Bhavana Bafna</div>
+          </div>
+          <div className="flex space-x-3">
+            <div className=" text-slate-500">Email: </div>
+            <div className=" font-bold">bhavnaabafna.bb@gmail.com</div>
+          </div>
+          <div className="flex space-x-3">
+            <div className=" text-slate-500">Mobile: </div>
+            <div className=" font-bold">9823889479</div>
+          </div>
+          <div className="flex space-x-3">
+            <div className=" text-slate-500">Total Investments: </div>
+            <div className=" font-bold">21</div>
+          </div>
+          <div className="flex space-x-3">
+            <div className=" text-slate-500">Amount invested: </div>
+            <div className=" font-bold">$ 450,000</div>
+          </div>
+        </div>
+      </div>
       <div>
-        {/* <div>
-        <Radio.Group
-          style={{
-            marginBottom: 10,
-          }}
-          options={topOptions}
-          value={top}
-          onChange={(e) => {
-            setTop(e.target.value);
-          }}
-        />
-      </div> */}
-        {/* <Radio.Group
-        style={{
-          marginBottom: 10,
-        }}
-        options={bottomOptions}
-        value={bottom}
-        onChange={(e) => {
-          setBottom(e.target.value);
-        }}
-      /> */}
         <Table
           columns={columns}
           pagination={{
