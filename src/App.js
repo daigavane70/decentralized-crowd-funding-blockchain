@@ -82,7 +82,6 @@ function App() {
               path="/investorprofile"
               element={<Investor></Investor>}
             ></Route>
-            <Route path="/login" element={<Login></Login>}></Route>
             <Route
               path="/startup/{id}"
               element={<StartupDetails></StartupDetails>}
@@ -99,14 +98,15 @@ function App() {
     <div className="d-flex justify-center text-center h-screen w-full">
       <Routes>
         <Route
-          path="/"
-          element={<Welcome setLoggedIn={setLoggedIn}></Welcome>}
+          path="/login"
+          element={<Login setLoggedIn={setLoggedIn}></Login>}
         ></Route>
         <Route
           path="/createCampaignManagerProfile"
           element={<CreateCampaignManager></CreateCampaignManager>}
         ></Route>
         <Route path="/createInvestor" element={<SignUp></SignUp>}></Route>
+        <Route path="/*" element={<Welcome></Welcome>}></Route>
       </Routes>
     </div>
   );
@@ -125,7 +125,6 @@ const navBar = [
     key: "investorProfile",
     link: "/investorprofile",
   },
-  { label: "Login", key: "login", link: "/login" },
   // {
   //   label: "Create campaign manager",
   //   key: "createCampaignManager",

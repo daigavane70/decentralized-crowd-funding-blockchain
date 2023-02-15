@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../App.css";
 
-const Login = () => {
+const Login = (props) => {
   const initialValues = { username: "", password: "" };
 
   const [formValues, setFormValues] = useState(initialValues);
@@ -48,7 +48,7 @@ const Login = () => {
       )}
 
       <form onSubmit={handleSubmit}>
-        <h1>Login Form</h1>
+        <h1>Login</h1>
         <div className="ui divider"></div>
         <div className="ui form">
           <div className="field">
@@ -73,7 +73,12 @@ const Login = () => {
             />
           </div>
           <p style={{ color: "red" }}>{formErrors.password}</p>
-          <button className="fluid ui button blue">Login</button>
+          <button
+            className="fluid ui button blue"
+            onClick={() => props.setLoggedIn(true)}
+          >
+            Proceed
+          </button>
         </div>
       </form>
     </div>

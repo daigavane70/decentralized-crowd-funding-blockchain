@@ -13,7 +13,7 @@ export default function Welcome(props) {
         </div>
         <Button
           className="w-[200px] bg-blue-500 text-white"
-          onClick={() => props.setLoggedIn(true)}
+          onClick={() => navigate("/login")}
         >
           Login
         </Button>
