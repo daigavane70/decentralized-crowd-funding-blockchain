@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const backend = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "http://localhost:5001",
 });
 
-export const getAllStartups = async () => await backend.get("/startups");
+export const getAllStartups = () => backend.get("/startups");
+export const getStartupById = (id) => backend.get("/startups/" + id);

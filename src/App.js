@@ -83,7 +83,7 @@ function App() {
               element={<Investor></Investor>}
             ></Route>
             <Route
-              path="/startup/{id}"
+              path="/startups/:id"
               element={<StartupDetails></StartupDetails>}
             ></Route>
           </Routes>

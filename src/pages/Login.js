@@ -1,4 +1,6 @@
+import { Button } from "antd";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 const Login = (props) => {
@@ -18,6 +20,8 @@ const Login = (props) => {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(formErrors);
@@ -73,12 +77,15 @@ const Login = (props) => {
             />
           </div>
           <p style={{ color: "red" }}>{formErrors.password}</p>
-          <button
-            className="fluid ui button blue"
-            onClick={() => props.setLoggedIn(true)}
+          <Button
+            className="w-full bg-blue-400 text-white"
+            onClick={() => {
+              props.setLoggedIn(true);
+              navigate("/");
+            }}
           >
             Proceed
-          </button>
+          </Button>
         </div>
       </form>
     </div>
