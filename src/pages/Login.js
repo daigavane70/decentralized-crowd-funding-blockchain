@@ -1,7 +1,9 @@
+import { Button } from "antd";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
-const Login = () => {
+const Login = (props) => {
   const initialValues = { username: "", password: "" };
 
   const [formValues, setFormValues] = useState(initialValues);
@@ -18,6 +20,8 @@ const Login = () => {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(formErrors);
@@ -48,7 +52,7 @@ const Login = () => {
       )}
 
       <form onSubmit={handleSubmit}>
-        <h1>Login Form</h1>
+        <h1>Login</h1>
         <div className="ui divider"></div>
         <div className="ui form">
           <div className="field">
@@ -73,7 +77,15 @@ const Login = () => {
             />
           </div>
           <p style={{ color: "red" }}>{formErrors.password}</p>
-          <button className="fluid ui button blue">Login</button>
+          <Button
+            className="w-full bg-blue-400 text-white"
+            onClick={() => {
+              props.setLoggedIn(true);
+              navigate("/");
+            }}
+          >
+            Proceed
+          </Button>
         </div>
       </form>
     </div>

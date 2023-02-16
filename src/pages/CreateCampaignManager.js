@@ -17,6 +17,7 @@ const CreateInvestor = () => {
   const onFinish = (values) => {
     console.log(values);
   };
+
   const onReset = () => {
     formRef.current?.resetFields();
   };
