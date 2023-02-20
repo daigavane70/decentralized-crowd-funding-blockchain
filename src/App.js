@@ -2,22 +2,37 @@ import "./App.css";
 import { Layout, Menu } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import ManagerProfile from "./pages/ManagerProfile";
 import MyStartups from "./pages/MyStartups";
 import Investor from "./pages/Investor";
 import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
+import CreateInvestor from "./pages/CreateInvestorProfile";
 import CreateCampaignManager from "./pages/CreateCampaignManager";
 import Welcome from "./pages/Welcome";
 import StartupDetails from "./pages/StartupDetails";
+import { loginWithToken } from "./config/Requests";
 
 function App() {
   const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+
+  const setUserByToken = (token) => {
+    loginWithToken(token).then((res) => {
+      console.log(res.data);
+    });
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("auth-token-34");
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, []);
 
   return loggedIn ? (
     <Layout hasSider>
@@ -105,7 +120,16 @@ function App() {
           path="/createCampaignManagerProfile"
           element={<CreateCampaignManager></CreateCampaignManager>}
         ></Route>
-        <Route path="/createInvestor" element={<SignUp></SignUp>}></Route>
+        <Route
+          path="/createInvestor"
+          element={
+            <CreateInvestor
+              setLoggedIn={setLoggedIn}
+              setUser={setUser}
+              setUserByToken={setUserByToken}
+            ></CreateInvestor>
+          }
+        ></Route>
         <Route path="/*" element={<Welcome></Welcome>}></Route>
       </Routes>
     </div>

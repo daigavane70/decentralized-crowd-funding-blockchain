@@ -6,3 +6,10 @@ const backend = axios.create({
 
 export const getAllStartups = () => backend.get("/startups");
 export const getStartupById = (id) => backend.get("/startups/" + id);
+export const createUser = (data) => backend.post("/users", data);
+export const loginWithToken = (token) =>
+  backend.post("/users", {
+    Headers: {
+      authorization: token,
+    },
+  });
