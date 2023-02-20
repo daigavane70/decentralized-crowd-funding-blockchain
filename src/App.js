@@ -24,7 +24,7 @@ function App() {
 
   const tokenKey = "auth-token-34";
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
 
   const setUserByToken = async (token) => {
