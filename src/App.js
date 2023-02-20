@@ -15,6 +15,8 @@ import Welcome from "./pages/Welcome";
 import StartupDetails from "./pages/StartupDetails";
 import { loginWithToken } from "./config/Requests";
 import Vendor from "./pages/Vendor";
+import CreateStartup from "./pages/CreateStartup";
+import CreateSpendingRequest from "./pages/CreateSpendingRequest";
 
 function App() {
   const navigate = useNavigate();
@@ -122,6 +124,18 @@ function App() {
             <Route
               path="/startups/:id"
               element={<StartupDetails></StartupDetails>}
+            ></Route>
+            <Route
+              path="/createSpendingRequest"
+              element={<CreateSpendingRequest></CreateSpendingRequest>}
+            ></Route>
+            <Route
+              path="/createSpendingRequest"
+              element={<CreateSpendingRequest></CreateSpendingRequest>}
+            ></Route>
+            <Route
+              path="/createStartup"
+              element={<CreateStartup></CreateStartup>}
             ></Route>
           </Routes>
         </Content>

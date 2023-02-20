@@ -4,117 +4,130 @@ import { Descriptions } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 const topOptions = [
-  {
-    label: "topLeft",
-    value: "topLeft",
-  },
-  {
-    label: "topCenter",
-    value: "topCenter",
-  },
-  {
-    label: "topRight",
-    value: "topRight",
-  },
-  {
-    label: "none",
-    value: "none",
-  },
-];
-const bottomOptions = [
-  {
-    label: "bottomLeft",
-    value: "bottomLeft",
-  },
-  {
-    label: "bottomCenter",
-    value: "bottomCenter",
-  },
-  {
-    label: "bottomRight",
-    value: "bottomRight",
-  },
-  {
-    label: "none",
-    value: "none",
-  },
-];
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (tags) => (
-      <span>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "loser") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </span>
-    ),
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-];
+    {
+      label: 'topLeft',
+      value: 'topLeft',
+    },
+    {
+      label: 'topCenter',
+      value: 'topCenter',
+    },
+    {
+      label: 'topRight',
+      value: 'topRight',
+    },
+    {
+      label: 'none',
+      value: 'none',
+    },
+  ];
+  const bottomOptions = [
+    {
+      label: 'bottomLeft',
+      value: 'bottomLeft',
+    },
+    {
+      label: 'bottomCenter',
+      value: 'bottomCenter',
+    },
+    {
+      label: 'bottomRight',
+      value: 'bottomRight',
+    },
+    {
+      label: 'none',
+      value: 'none',
+    },
+  ];
+
+
+  const columns = [
+    {
+      title: 'Sr no.',
+      dataIndex: 'srno',
+      key: 'srno',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Start up Name',
+      dataIndex: 'name',
+      key: 'name',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Campaign Manager Name',
+      dataIndex: 'cmname',
+      key: 'cmname',
+    },
+    {
+      title: 'Vendor Name',
+      dataIndex: 'vendorname',
+      key: 'vendorname',
+    },
+    {
+      title: 'Amount to be raised',
+      dataIndex: 'amount',
+      key: 'amount',
+    },
+    {
+      title: 'Total Amount Raised',
+      dataIndex: 'tamount',
+      key: 'tamount',
+    },
+    {
+      title: 'Approvals',
+      dataIndex: 'approvals',
+      key: 'approvals',
+    },
+    {
+      title: 'Creation Date',
+      dataIndex: 'dateTime',
+      key: 'dateTime',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <a>Accept</a>
+          <a>Reject</a>
+        </Space>
+      ),
+    },
+  ];
+  const data = [
+    {
+      key: '1',
+      name: 'John Brown',
+      age: 32,
+      address: 'New York No. 1 Lake Park',
+      tags: ['nice', 'developer'],
+    },
+    {
+      key: '2',
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park',
+      tags: ['loser'],
+    },
+    {
+      key: '3',
+      name: 'Joe Black',
+      age: 32,
+      address: 'Sydney No. 1 Lake Park',
+      tags: ['cool', 'teacher'],
+    },
+  ];
 
 const Investor = ({ investorId }) => {
-  const [investor, setInvestor] = useState({});
-  const [top, setTop] = useState("topLeft");
-  const [bottom, setBottom] = useState("bottomRight");
+    const [investor, setInvestor] = useState({});
+    const [top, setTop] = useState('topLeft');
+    const [bottom, setBottom] = useState('bottomRight');
 
   useEffect(() => {
     async function fetchInvestorData() {
@@ -127,7 +140,7 @@ const Investor = ({ investorId }) => {
   }, [investorId]);
 
   return (
-    <div className="investor-profile">
+    <div className="investor-profile space-y-3">
       <div className="text-4xl mb-4 font-bold border-b pb-2 text-gray-400">
         Investor Profile
       </div>
@@ -162,13 +175,13 @@ const Investor = ({ investorId }) => {
         <Table
           columns={columns}
           pagination={{
-            position: [top, bottom],
+            position: [bottom],
           }}
           dataSource={data}
         />
       </div>
     </div>
-  );
-};
-
-export default Investor;
+    );
+  };
+  
+  export default Investor;
