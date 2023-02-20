@@ -14,6 +14,7 @@ import CreateCampaignManager from "./pages/CreateCampaignManager";
 import Welcome from "./pages/Welcome";
 import StartupDetails from "./pages/StartupDetails";
 import { loginWithToken } from "./config/Requests";
+import Vendor from "./pages/Vendor";
 
 function App() {
   const navigate = useNavigate();
@@ -130,6 +131,7 @@ function App() {
             ></CreateInvestor>
           }
         ></Route>
+        <Route path="/createVendor" element={<Vendor></Vendor>}></Route>
         <Route path="/*" element={<Welcome></Welcome>}></Route>
       </Routes>
     </div>
