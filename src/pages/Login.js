@@ -1,5 +1,6 @@
 import { Button, Form, Input, Select } from "antd";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { createUser, login } from "../config/Requests";
 
 const tailLayout = {
@@ -9,45 +10,24 @@ const tailLayout = {
   },
 };
 
-const CreateInvestor = ({ setLoggedIn, setUser }) => {
+const CreateInvestor = ({ setLoggedIn, loginWithToken }) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const formRef = React.useRef(null);
   const { Option } = Select;
 
-  const onReset = () => {
-    formRef.current?.resetFields();
-  };
-
-  const onFill = () => {
-    form.setFieldsValue({
-      note: "Hello world!",
-      gender: "male",
-    });
-  };
-
-  const onGenderChange = (value) => {
-    switch (value) {
-      case "male":
-        form.setFieldsValue({ note: "Hi, man!" });
-        break;
-      case "female":
-        form.setFieldsValue({ note: "Hi, lady!" });
-        break;
-      case "other":
-        form.setFieldsValue({ note: "Hi there!" });
-        break;
-      default:
-    }
-  };
+  const navigate = useNavigate();
 
   const onFinish = (values) => {
     async function getData() {
       try {
         const res = await login(values);
         console.log(res.data);
+        loginWithToken(res.data.token);
         setLoading(false);
+        setLoggedIn(true);
+        navigate("/");
       } catch (e) {}
     }
 
@@ -94,7 +74,11 @@ const CreateInvestor = ({ setLoggedIn, setUser }) => {
           <Input></Input>
         </Form.Item>
         <Form.Item {...tailLayout} className="space-x-4">
-          <Button className=" bg-blue-500 text-white mr-2" htmlType="submit">
+          <Button
+            className="bg-blue-500 text-white mr-2"
+            loading={loading}
+            htmlType="submit"
+          >
             Login
           </Button>
         </Form.Item>

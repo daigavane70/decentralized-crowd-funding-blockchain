@@ -150,7 +150,12 @@ function App() {
       <Routes>
         <Route
           path="/login"
-          element={<Login setLoggedIn={setLoggedIn}></Login>}
+          element={
+            <Login
+              setLoggedIn={setLoggedIn}
+              loginWithToken={loginWithToken}
+            ></Login>
+          }
         ></Route>
         <Route
           path="/createCampaignManagerProfile"

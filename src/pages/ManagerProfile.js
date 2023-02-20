@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Radio, Space, Table, Tag, Avatar, Button, Select, Form, Input } from "antd";
+import {
+  Radio,
+  Space,
+  Table,
+  Tag,
+  Avatar,
+  Button,
+  Select,
+  Form,
+  Input,
+} from "antd";
 import { Descriptions } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -113,19 +123,23 @@ export default function ManagerProfile() {
       </div>
       <div></div>
       <div>
-        <Button className="w-1/6 bg-blue-400 text-white"
-        onClick={() => {
-          navigate("/createSpendingRequest");
-        }}>
+        <Button
+          className="w-1/6 bg-blue-400 text-white"
+          onClick={() => {
+            navigate("/createSpendingRequest");
+          }}
+        >
           Create Campaign
         </Button>
       </div>
 
       <div>
-        <Button className="w-1/6 bg-blue-400 text-white"
-        onClick={() => {
-          navigate("/createStartup");
-        }}>
+        <Button
+          className="w-1/6 bg-blue-400 text-white"
+          onClick={() => {
+            navigate("/createStartup");
+          }}
+        >
           Create Startup
         </Button>
       </div>
