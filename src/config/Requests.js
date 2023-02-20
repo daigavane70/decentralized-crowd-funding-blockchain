@@ -7,9 +7,10 @@ const backend = axios.create({
 export const getAllStartups = () => backend.get("/startups");
 export const getStartupById = (id) => backend.get("/startups/" + id);
 export const createUser = (data) => backend.post("/users", data);
+export const login = (data) => backend.post("/users/login", data);
 export const loginWithToken = (token) =>
-  backend.post("/users", {
-    Headers: {
-      authorization: token,
+  backend.get("/users/profile", {
+    headers: {
+      Authorization: token,
     },
   });

@@ -1,95 +1,106 @@
-import { Button } from "antd";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "../App.css";
+import { Button, Form, Input, Select } from "antd";
+import React, { useState } from "react";
+import { createUser, login } from "../config/Requests";
 
-const Login = (props) => {
-  const initialValues = { username: "", password: "" };
+const tailLayout = {
+  wrapperCol: {
+    offset: 4,
+    span: 16,
+  },
+};
 
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+const CreateInvestor = ({ setLoggedIn, setUser }) => {
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [form] = Form.useForm();
+  const formRef = React.useRef(null);
+  const { Option } = Select;
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+  const onReset = () => {
+    formRef.current?.resetFields();
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmit(true);
+  const onFill = () => {
+    form.setFieldsValue({
+      note: "Hello world!",
+      gender: "male",
+    });
   };
 
-  const navigate = useNavigate();
+  const onGenderChange = (value) => {
+    switch (value) {
+      case "male":
+        form.setFieldsValue({ note: "Hi, man!" });
+        break;
+      case "female":
+        form.setFieldsValue({ note: "Hi, lady!" });
+        break;
+      case "other":
+        form.setFieldsValue({ note: "Hi there!" });
+        break;
+      default:
+    }
+  };
 
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
+  const onFinish = (values) => {
+    async function getData() {
+      try {
+        const res = await login(values);
+        console.log(res.data);
+        setLoading(false);
+      } catch (e) {}
     }
-  }, [formErrors]);
 
-  const validate = (values) => {
-    const errors = {};
-    if (!values.username) {
-      errors.username = "Username is required!";
-    }
-    if (!values.password) {
-      errors.password = "Password is required";
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 characters";
-    } else if (values.password.length > 10) {
-      errors.password = "Password cannot exceed more than 10 characters";
-    }
-    return errors;
+    setLoading(true);
+    getData();
   };
 
   return (
-    <div className="container">
-      {Object.keys(formErrors).length === 0 && isSubmit && (
-        <div className="ui message success">Signed in successfully</div>
-      )}
-
-      <form onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <div className="ui divider"></div>
-        <div className="ui form">
-          <div className="field">
-            <label>Username</label>
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formValues.username}
-              onChange={handleChange}
-            />
-          </div>
-          <p style={{ color: "red" }}>{formErrors.username}</p>
-          <div className="field">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formValues.password}
-              onChange={handleChange}
-            />
-          </div>
-          <p style={{ color: "red" }}>{formErrors.password}</p>
-          <Button
-            className="w-full bg-blue-400 text-white"
-            onClick={() => {
-              props.setLoggedIn(true);
-              navigate("/");
-            }}
-          >
-            Proceed
+    <div className="text-center space-y-2 mt-40">
+      <h1 className=" text-4xl font-bold mb-10">Login</h1>
+      <Form
+        className="w-[400px] mx-auto border p-4 py-8 bg-gray-50 rounded-lg"
+        title="Enter campaign manager details"
+        name="basic"
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 600 }}
+        initialValues={{
+          email: "iamalbert@gmai.com",
+          password: "password123",
+        }}
+        onFinish={onFinish}
+        onFinishFailed={() => {}}
+        autoComplete="off"
+        ref={formRef}
+      >
+        <Form.Item
+          label="Email"
+          name={"email"}
+          rules={[{ required: true, message: "This field is required" }]}
+        >
+          <Input></Input>
+        </Form.Item>
+        <Form.Item
+          label="Password"
+          name={"password"}
+          rules={[
+            {
+              required: true,
+              message: "This field is required",
+            },
+          ]}
+        >
+          <Input></Input>
+        </Form.Item>
+        <Form.Item {...tailLayout} className="space-x-4">
+          <Button className=" bg-blue-500 text-white mr-2" htmlType="submit">
+            Login
           </Button>
-        </div>
-      </form>
+        </Form.Item>
+      </Form>
     </div>
   );
 };
 
-export default Login;
+export default CreateInvestor;

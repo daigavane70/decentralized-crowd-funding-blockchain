@@ -1,5 +1,5 @@
 import "./App.css";
-import { Layout, Menu } from "antd";
+import { Button, Layout, Menu } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import React, { useEffect, useState } from "react";
@@ -19,6 +19,8 @@ import Vendor from "./pages/Vendor";
 function App() {
   const navigate = useNavigate();
 
+  const tokenKey = "auth-token-34";
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
 
@@ -28,11 +30,27 @@ function App() {
     });
   };
 
+  const logout = () => {
+    setLoggedIn(false);
+    setUser({});
+  };
+
   useEffect(() => {
-    const token = localStorage.getItem("auth-token-34");
-    if (token) {
-      setLoggedIn(true);
+    let token = localStorage.getItem("auth-token-34");
+
+    async function login() {
+      localStorage.setItem(tokenKey, token);
+
+      if (token) {
+        const res = await loginWithToken(token);
+        setLoggedIn(true);
+      }
     }
+
+    // token =
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNmM2MyZmI5ZjkzMTA3MjQ1ODczODk0In0sImlhdCI6MTY3NjkxOTU0N30.nl0mPoguEwPXuKR8i87rtPnD_1GX_FQZmdJig3Bjq3U";
+
+    login();
   }, []);
 
   return loggedIn ? (
@@ -69,12 +87,15 @@ function App() {
       </Sider>
       <Layout className="site-layout bg-white" style={{ marginLeft: 200 }}>
         <Header
-          className="site-layout-background flex"
+          className="site-layout-background flex items-center justify-between"
           style={{ padding: 0, height: "60px" }}
         >
           <div className="text-3xl my-auto text-white font-bold">
             Crowd Funding Application
           </div>
+          <Button className=" bg-red-500 text-white" onClick={logout}>
+            Logout
+          </Button>
         </Header>
         <Content
           style={{ margin: "0px 16px 0", overflow: "initial" }}
