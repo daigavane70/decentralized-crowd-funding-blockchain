@@ -13,6 +13,8 @@ import SignUp from "./pages/SignUp";
 import CreateCampaignManager from "./pages/CreateCampaignManager";
 import Welcome from "./pages/Welcome";
 import StartupDetails from "./pages/StartupDetails";
+import CreateStartup from "./pages/CreateStartup";
+import CreateSpendingRequest from "./pages/CreateSpendingRequest";
 
 function App() {
   const navigate = useNavigate();
@@ -85,6 +87,18 @@ function App() {
             <Route
               path="/startups/:id"
               element={<StartupDetails></StartupDetails>}
+            ></Route>
+            <Route
+            path="/createSpendingRequest"
+            element={<CreateSpendingRequest></CreateSpendingRequest>}
+            ></Route>
+            <Route
+            path="/createSpendingRequest"
+            element={<CreateSpendingRequest></CreateSpendingRequest>}
+            ></Route>
+            <Route
+            path="/createStartup"
+            element={<CreateStartup></CreateStartup>}
             ></Route>
           </Routes>
         </Content>

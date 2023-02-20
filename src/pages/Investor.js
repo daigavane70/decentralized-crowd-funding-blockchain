@@ -39,50 +39,63 @@ const topOptions = [
       value: 'none',
     },
   ];
+
+
   const columns = [
     {
-      title: 'Name',
+      title: 'Sr no.',
+      dataIndex: 'srno',
+      key: 'srno',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Start up Name',
       dataIndex: 'name',
       key: 'name',
       render: (text) => <a>{text}</a>,
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: 'Campaign Manager Name',
+      dataIndex: 'cmname',
+      key: 'cmname',
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'Vendor Name',
+      dataIndex: 'vendorname',
+      key: 'vendorname',
     },
     {
-      title: 'Tags',
-      key: 'tags',
-      dataIndex: 'tags',
-      render: (tags) => (
-        <span>
-          {tags.map((tag) => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
-              color = 'volcano';
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </span>
-      ),
+      title: 'Amount to be raised',
+      dataIndex: 'amount',
+      key: 'amount',
+    },
+    {
+      title: 'Total Amount Raised',
+      dataIndex: 'tamount',
+      key: 'tamount',
+    },
+    {
+      title: 'Approvals',
+      dataIndex: 'approvals',
+      key: 'approvals',
+    },
+    {
+      title: 'Creation Date',
+      dataIndex: 'dateTime',
+      key: 'dateTime',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
     },
     {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
+          <a>Accept</a>
+          <a>Reject</a>
         </Space>
       ),
     },
@@ -127,7 +140,7 @@ const Investor = ({ investorId }) => {
   }, [investorId]);
 
   return (
-    <div className="investor-profile">
+    <div className="investor-profile space-y-3">
       <div className="text-4xl mb-4 font-bold border-b pb-2 text-gray-400">
         Investor Profile
       </div>
@@ -162,7 +175,7 @@ const Investor = ({ investorId }) => {
         <Table
           columns={columns}
           pagination={{
-            position: [top, bottom],
+            position: [bottom],
           }}
           dataSource={data}
         />
