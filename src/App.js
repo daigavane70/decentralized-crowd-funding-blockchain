@@ -164,10 +164,7 @@ function App() {
         <Route
           path="/createInvestor"
           element={
-            <CreateInvestor
-              setLoggedIn={setLoggedIn}
-              setUserByToken={setUserByToken}
-            ></CreateInvestor>
+            <CreateInvestor setUserByToken={setUserByToken}></CreateInvestor>
           }
         ></Route>
         <Route path="/createVendor" element={<Vendor></Vendor>}></Route>
