@@ -4,14 +4,9 @@ import { Descriptions } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
+import { getAllSpendingRequests } from "../config/Requests";
 
 const columns = [
-  {
-    title: "Sr no.",
-    dataIndex: "srno",
-    key: "srno",
-    render: (text) => <a>{text}</a>,
-  },
   {
     title: "Start up Name",
     dataIndex: "name",
@@ -27,6 +22,16 @@ const columns = [
     title: "Vendor Name",
     dataIndex: "vendorname",
     key: "vendorname",
+  },
+  {
+    title: "Spending Request Name",
+    dataIndex: "title",
+    key: "title",
+  },
+  {
+    title: "Product Details",
+    dataIndex: "productDetails",
+    key: "productDetails",
   },
   {
     title: "Amount to be raised",
@@ -45,8 +50,13 @@ const columns = [
   },
   {
     title: "Creation Date",
-    dataIndex: "dateTime",
-    key: "dateTime",
+    dataIndex: "createdAt",
+    key: "createdAt",
+  },
+  {
+    title: "Expiry Date",
+    dataIndex: "expiryTime",
+    key: "expiryTime",
   },
   {
     title: "Status",
@@ -54,7 +64,7 @@ const columns = [
     key: "status",
   },
 ];
-const data = [
+const dummyData = [
   {
     key: "1",
     name: "John Brown",
@@ -82,6 +92,24 @@ export default function ManagerProfile() {
   const [top, setTop] = useState("topLeft");
   const [bottom, setBottom] = useState("bottomRight");
   const navigate = useNavigate();
+  
+  const [loading, setLoading] = useState(false);
+  const [data,setData] =  useState(dummyData);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const res = await getAllSpendingRequests();
+        setData(res.data);
+        setLoading(false);
+      } catch (e) {}
+    }
+
+    setLoading(true);
+    getData();
+  }, []);
+
+  
 
   return (
     <div className="manager-profile space-y-2">
@@ -132,6 +160,7 @@ export default function ManagerProfile() {
 
       <div>
         <Table
+          loading={loading}
           columns={columns}
           pagination={{
             position: [bottom],

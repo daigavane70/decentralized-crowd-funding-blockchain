@@ -1,5 +1,5 @@
 import { Card, Divider, Tag, Tooltip } from "antd";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   CartesianGrid,
   Legend,
@@ -9,8 +9,25 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { getInvestmentsById } from "../config/Requests";
 
 export default function MyStartups() {
+  const [loading, setLoading] = useState(false);
+  const [data,setData] =  useState(dummyData);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const res = await getInvestmentsById();
+        setData(res.data);
+        setLoading(false);
+      } catch (e) {}
+    }
+
+    setLoading(true);
+    getData();
+  }, []);
+
   return (
     <div>
       <Divider orientation="left">Portfolio graph</Divider>
@@ -56,7 +73,7 @@ export default function MyStartups() {
   );
 }
 
-const data = [
+const dummyData = [
   {
     name: "Jan",
     uv: 4000,
