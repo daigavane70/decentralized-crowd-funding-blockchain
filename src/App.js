@@ -13,6 +13,7 @@ import SignUp from "./pages/SignUp";
 import CreateCampaignManager from "./pages/CreateCampaignManager";
 import Welcome from "./pages/Welcome";
 import StartupDetails from "./pages/StartupDetails";
+import Vendor from './pages/Vendor';
 
 function App() {
   const navigate = useNavigate();
@@ -104,6 +105,10 @@ function App() {
         <Route
           path="/createCampaignManagerProfile"
           element={<CreateCampaignManager></CreateCampaignManager>}
+        ></Route>
+        <Route
+          path="/createVendor"
+          element={<Vendor></Vendor>}
         ></Route>
         <Route path="/createInvestor" element={<SignUp></SignUp>}></Route>
         <Route path="/*" element={<Welcome></Welcome>}></Route>
