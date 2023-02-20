@@ -9,7 +9,7 @@ const tailLayout = {
   },
 };
 
-const CreateInvestor = ({ setLoggedIn, setUser }) => {
+const CreateInvestor = ({ setUserByToken }) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
@@ -49,6 +49,7 @@ const CreateInvestor = ({ setLoggedIn, setUser }) => {
       try {
         const res = await createUser(values);
         console.log(res.data);
+        setUserByToken(res.data.token);
         setLoading(false);
       } catch (e) {}
     }

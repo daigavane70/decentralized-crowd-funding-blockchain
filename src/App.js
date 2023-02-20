@@ -27,10 +27,10 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(true);
   const [user, setUser] = useState({});
 
-  const setUserByToken = (token) => {
-    loginWithToken(token).then((res) => {
-      console.log(res.data);
-    });
+  const setUserByToken = async (token) => {
+    const res = await loginWithToken(token);
+    setUser(res.data);
+    setLoggedIn(true);
   };
 
   const logout = () => {
@@ -43,10 +43,10 @@ function App() {
 
     async function login() {
       localStorage.setItem(tokenKey, token);
-
       if (token) {
         const res = await loginWithToken(token);
         setLoggedIn(true);
+        setUser(res.data);
       }
     }
 
@@ -155,7 +155,12 @@ function App() {
       <Routes>
         <Route
           path="/login"
-          element={<Login setLoggedIn={setLoggedIn}></Login>}
+          element={
+            <Login
+              setLoggedIn={setLoggedIn}
+              loginWithToken={loginWithToken}
+            ></Login>
+          }
         ></Route>
         <Route
           path="/createCampaignManagerProfile"
@@ -166,7 +171,6 @@ function App() {
           element={
             <CreateInvestor
               setLoggedIn={setLoggedIn}
-              setUser={setUser}
               setUserByToken={setUserByToken}
             ></CreateInvestor>
           }
