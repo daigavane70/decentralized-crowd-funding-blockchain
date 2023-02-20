@@ -30,6 +30,7 @@ function App() {
     const res = await loginWithToken(token);
     setUser(res.data);
     setLoggedIn(true);
+    navigate("/");
   };
 
   const logout = () => {
