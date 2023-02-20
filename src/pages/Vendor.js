@@ -1,138 +1,145 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../App.css";
+import { createUser } from "../config/Requests";
+import { Button, Form, Input, Select } from "antd";
+
+
+const tailLayout = {
+    wrapperCol: {
+      offset: 4,
+      span: 16,
+    },
+  };
 
 const Vendor = () => {
-  const initialValues = {
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    mobileNo: ""
-  };
 
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+    const [form] = Form.useForm();
+  const { Option } = Select;
+  const formRef = React.useRef(null);
+  
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmit(true);
-  };
-
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
+  const onGenderChange = (value) => {
+    switch (value) {
+      case "male":
+        form.setFieldsValue({ note: "Hi, man!" });
+        break;
+      case "female":
+        form.setFieldsValue({ note: "Hi, lady!" });
+        break;
+      case "other":
+        form.setFieldsValue({ note: "Hi there!" });
+        break;
+      default:
     }
-  }, [formErrors]);
+}
 
-  const validate = (values) => {
-    const errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if (!values.username) {
-      errors.username = "Username is required!";
-    }
-    if (!values.email) {
-      errors.email = "Email is required!";
-    } else if (!regex.test(values.email)) {
-      errors.email = "This is not a valid email format!";
-    }
-    if (!values.password) {
-      errors.password = "Password is required";
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 characters";
-    } else if (values.password.length > 10) {
-      errors.password = "Password cannot exceed more than 10 characters";
+  const handleSubmit = (values) => {
+    values = { ...values, role: "VENDOR" };
+    console.log(values);
+    async function getData() {
+      try {
+        const res = await createUser(values);
+        console.log(res.data);
+        setLoading(false);
+      } catch (e) {}
     }
 
-    if (!values.confirmPassword) {
-      errors.confirmPassword = "This field is required";
-    } else if (values.password !== values.confirmPassword) {
-      errors.confirmPassword = "The two passwords do not match";
-    }
-
-    if (!values.mobileNo) {
-        errors.mobileNo = "Mobile Number is required";
-      } else if (values.mobileNo.length != 10) {
-        errors.mobileNo = "Mobile Number should be of exact 10 numbers";
-      }
-    return errors;
+    setLoading(true);
+    getData();
   };
 
   return (
     <div className="container text-left">
-      {Object.keys(formErrors).length === 0 && isSubmit && (
-        <div className="ui message success">Signed Up successfully</div>
-      )}
 
-      <form onSubmit={handleSubmit}>
-        <h1>Create Vendor profile</h1>
-        <div className="ui divider"></div>
-        <div className="ui form">
-          <div className="field">
-            <label>Username</label>
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formValues.username}
-              onChange={handleChange}
-            />
-          </div>
-          <p style={{ color: "red" }}>{formErrors.username}</p>
-          <div className="field">
-            <label>Email</label>
-            <input
-              type="text"
-              name="email"
-              placeholder="Email"
-              value={formValues.email}
-              onChange={handleChange}
-            />
-          </div>
-          <p style={{ color: "red" }}>{formErrors.email}</p>
-          <div className="field">
-            <label>Mobile No.:</label>
-            <input
-              type="number"
-              name="mobileNo"
-              placeholder="Mobile No."
-              value={formValues.mobileNo}
-              onChange={handleChange}
-            />
-          </div>
-          <p style={{ color: "red" }}>{formErrors.mobileNo}</p>
-          <div className="field">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formValues.password}
-              onChange={handleChange}
-            />
-          </div>
-          <p style={{ color: "red" }}>{formErrors.password}</p>
-          <div className="field">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              value={formValues.confirmPassword}
-              onChange={handleChange}
-            />
-          </div>
-          <p style={{ color: "red" }}>{formErrors.confirmPassword}</p>
-          <button className="fluid ui button blue">Sign Up!</button>
-        </div>
-      </form>
+<Form
+        className="w-[600px] mx-auto border p-4 py-8 bg-gray-50 rounded-lg"
+        title="Enter campaign manager details"
+        name="basic"
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 600 }}
+        initialValues={{
+          name: "Albert Einstein",
+          email: "iamalbert@gmai.com",
+          mobile: "98112323432",
+          gender: "Male",
+          role: "INVESTOR",
+          password: "password123",
+          confirmPassword: "password123",
+        }}
+        onFinish={handleSubmit}
+        onFinishFailed={() => {}}
+        autoComplete="off"
+        ref={formRef}
+      >
+        <Form.Item
+          label="Name"
+          name={"name"}
+          rules={[{ required: true, message: "This field is required" }]}
+        >
+          <Input></Input>
+        </Form.Item>
+        <Form.Item
+          label="Email"
+          name={"email"}
+          rules={[{ required: true, message: "This field is required" }]}
+        >
+          <Input></Input>
+        </Form.Item>
+        <Form.Item
+          label="Mobile"
+          name={"mobile"}
+          rules={[
+            {
+              required: true,
+              message: "This field is required",
+            },
+          ]}
+        >
+          <Input></Input>
+        </Form.Item>
+        <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
+          <Select
+            placeholder="Select your gender"
+            onChange={onGenderChange}
+            allowClear
+          >
+            <Option value="Male">Male</Option>
+            <Option value="Female">Female</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item
+          label="Password"
+          name={"password"}
+          rules={[
+            {
+              required: true,
+              message: "This field is required",
+            },
+          ]}
+        >
+          <Input></Input>
+        </Form.Item>
+        <Form.Item
+          label="Confirm password"
+          name={"confirmPassword"}
+          rules={[
+            {
+              required: true,
+              message: "This field is required",
+            },
+          ]}
+        >
+          <Input></Input>
+        </Form.Item>
+        <Form.Item {...tailLayout} className="space-x-4">
+          <Button className=" bg-blue-500 text-white mr-2" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    
     </div>
   );
 };
