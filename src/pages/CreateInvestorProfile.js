@@ -59,7 +59,7 @@ const CreateInvestor = ({ setLoggedIn, setUser }) => {
 
   return (
     <div className="text-center space-y-2 mt-40">
-      <h1 className=" text-4xl font-bold mb-10">Create campaign manager</h1>
+      <h1 className=" text-4xl font-bold mb-10">Create Investor</h1>
       <Form
         className="w-[600px] mx-auto border p-4 py-8 bg-gray-50 rounded-lg"
         title="Enter campaign manager details"
