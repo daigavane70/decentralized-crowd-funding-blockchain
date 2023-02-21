@@ -138,7 +138,7 @@ function App() {
             ></Route>
             <Route
               path="/investorprofile"
-              element={<Investor></Investor>}
+              element={<Investor user={user}></Investor>}
             ></Route>
             <Route
               path="/startups/:id"
@@ -182,7 +182,11 @@ function App() {
         ></Route>
         <Route
           path="/createCampaignManagerProfile"
-          element={<CreateCampaignManager></CreateCampaignManager>}
+          element={
+            <CreateCampaignManager
+              setUserByToken={setUserByToken}
+            ></CreateCampaignManager>
+          }
         ></Route>
         <Route
           path="/createInvestor"

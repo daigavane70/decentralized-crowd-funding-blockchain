@@ -1,5 +1,7 @@
 import { Button, Form, Input, Select } from "antd";
 import React, { useState } from "react";
+import { USER_TYPE_IDEAPERSON } from "../config/Constants";
+import { createUser } from "../config/Requests";
 
 const tailLayout = {
   wrapperCol: {
@@ -8,15 +10,12 @@ const tailLayout = {
   },
 };
 
-const CreateInvestor = () => {
+const CreateCampaignManager = ({ setUserByToken }) => {
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const formRef = React.useRef(null);
   const { Option } = Select;
-
-  const onFinish = (values) => {
-    console.log(values);
-  };
 
   const onReset = () => {
     formRef.current?.resetFields();
@@ -44,18 +43,41 @@ const CreateInvestor = () => {
     }
   };
 
+  const onFinish = (values) => {
+    values = { ...values, role: USER_TYPE_IDEAPERSON };
+    console.log(values);
+    async function getData() {
+      try {
+        const res = await createUser(values);
+        setUserByToken(res.data.token);
+        setLoading(false);
+      } catch (e) {}
+    }
+
+    setLoading(true);
+    getData();
+  };
+
   return (
     <div className="text-center space-y-2 mt-40">
-      <h1 className=" text-4xl font-bold mb-10">Create campaign manager</h1>
+      <h1 className=" text-4xl font-bold mb-10">Signup as campaign manager</h1>
       <Form
-        className="w-[500px] mx-auto border p-4 py-8 bg-gray-50 rounded-lg"
+        className="w-[600px] mx-auto border p-4 py-8 bg-gray-50 rounded-lg"
         title="Enter campaign manager details"
         name="basic"
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 600 }}
-        initialValues={{ remember: true, gender: "male" }}
-        onFinish={() => {}}
+        initialValues={{
+          name: "Albert Einstein",
+          email: "iamalbert@gmai.com",
+          mobile: "98112323432",
+          gender: "Male",
+          role: "INVESTOR",
+          password: "password123",
+          confirmPassword: "password123",
+        }}
+        onFinish={onFinish}
         onFinishFailed={() => {}}
         autoComplete="off"
         ref={formRef}
@@ -92,10 +114,33 @@ const CreateInvestor = () => {
             onChange={onGenderChange}
             allowClear
           >
-            <Option value="male">male</Option>
-            <Option value="female">female</Option>
-            <Option value="other">other</Option>
+            <Option value="Male">Male</Option>
+            <Option value="Female">Female</Option>
           </Select>
+        </Form.Item>
+        <Form.Item
+          label="Password"
+          name={"password"}
+          rules={[
+            {
+              required: true,
+              message: "This field is required",
+            },
+          ]}
+        >
+          <Input></Input>
+        </Form.Item>
+        <Form.Item
+          label="Confirm password"
+          name={"confirmPassword"}
+          rules={[
+            {
+              required: true,
+              message: "This field is required",
+            },
+          ]}
+        >
+          <Input></Input>
         </Form.Item>
         <Form.Item {...tailLayout} className="space-x-4">
           <Button className=" bg-blue-500 text-white mr-2" htmlType="submit">
@@ -113,4 +158,4 @@ const CreateInvestor = () => {
   );
 };
 
-export default CreateInvestor;
+export default CreateCampaignManager;

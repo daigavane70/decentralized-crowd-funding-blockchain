@@ -1,5 +1,6 @@
 import { Button, Form, Input, Select } from "antd";
 import React, { useState } from "react";
+import { USER_TYPE_INVESTOR } from "../config/Constants";
 import { createUser } from "../config/Requests";
 
 const tailLayout = {
@@ -43,12 +44,11 @@ const CreateInvestor = ({ setUserByToken }) => {
   };
 
   const onFinish = (values) => {
-    values = { ...values, role: "INVESTOR" };
+    values = { ...values, role: USER_TYPE_INVESTOR };
     console.log(values);
     async function getData() {
       try {
         const res = await createUser(values);
-        console.log(res.data);
         setUserByToken(res.data.token);
         setLoading(false);
       } catch (e) {}

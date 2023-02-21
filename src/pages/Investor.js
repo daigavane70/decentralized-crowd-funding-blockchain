@@ -4,130 +4,129 @@ import { Descriptions } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 const topOptions = [
-    {
-      label: 'topLeft',
-      value: 'topLeft',
-    },
-    {
-      label: 'topCenter',
-      value: 'topCenter',
-    },
-    {
-      label: 'topRight',
-      value: 'topRight',
-    },
-    {
-      label: 'none',
-      value: 'none',
-    },
-  ];
-  const bottomOptions = [
-    {
-      label: 'bottomLeft',
-      value: 'bottomLeft',
-    },
-    {
-      label: 'bottomCenter',
-      value: 'bottomCenter',
-    },
-    {
-      label: 'bottomRight',
-      value: 'bottomRight',
-    },
-    {
-      label: 'none',
-      value: 'none',
-    },
-  ];
+  {
+    label: "topLeft",
+    value: "topLeft",
+  },
+  {
+    label: "topCenter",
+    value: "topCenter",
+  },
+  {
+    label: "topRight",
+    value: "topRight",
+  },
+  {
+    label: "none",
+    value: "none",
+  },
+];
+const bottomOptions = [
+  {
+    label: "bottomLeft",
+    value: "bottomLeft",
+  },
+  {
+    label: "bottomCenter",
+    value: "bottomCenter",
+  },
+  {
+    label: "bottomRight",
+    value: "bottomRight",
+  },
+  {
+    label: "none",
+    value: "none",
+  },
+];
 
+const columns = [
+  {
+    title: "Sr no.",
+    dataIndex: "srno",
+    key: "srno",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Start up Name",
+    dataIndex: "name",
+    key: "name",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Campaign Manager Name",
+    dataIndex: "cmname",
+    key: "cmname",
+  },
+  {
+    title: "Vendor Name",
+    dataIndex: "vendorname",
+    key: "vendorname",
+  },
+  {
+    title: "Amount to be raised",
+    dataIndex: "amount",
+    key: "amount",
+  },
+  {
+    title: "Total Amount Raised",
+    dataIndex: "tamount",
+    key: "tamount",
+  },
+  {
+    title: "Approvals",
+    dataIndex: "approvals",
+    key: "approvals",
+  },
+  {
+    title: "Creation Date",
+    dataIndex: "dateTime",
+    key: "dateTime",
+  },
+  {
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
+  },
+  {
+    title: "Action",
+    key: "action",
+    render: (_, record) => (
+      <Space size="middle">
+        <a>Accept</a>
+        <a>Reject</a>
+      </Space>
+    ),
+  },
+];
+const data = [
+  {
+    key: "1",
+    name: "John Brown",
+    age: 32,
+    address: "New York No. 1 Lake Park",
+    tags: ["nice", "developer"],
+  },
+  {
+    key: "2",
+    name: "Jim Green",
+    age: 42,
+    address: "London No. 1 Lake Park",
+    tags: ["loser"],
+  },
+  {
+    key: "3",
+    name: "Joe Black",
+    age: 32,
+    address: "Sydney No. 1 Lake Park",
+    tags: ["cool", "teacher"],
+  },
+];
 
-  const columns = [
-    {
-      title: 'Sr no.',
-      dataIndex: 'srno',
-      key: 'srno',
-      render: (text) => <a>{text}</a>,
-    },
-    {
-      title: 'Start up Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: (text) => <a>{text}</a>,
-    },
-    {
-      title: 'Campaign Manager Name',
-      dataIndex: 'cmname',
-      key: 'cmname',
-    },
-    {
-      title: 'Vendor Name',
-      dataIndex: 'vendorname',
-      key: 'vendorname',
-    },
-    {
-      title: 'Amount to be raised',
-      dataIndex: 'amount',
-      key: 'amount',
-    },
-    {
-      title: 'Total Amount Raised',
-      dataIndex: 'tamount',
-      key: 'tamount',
-    },
-    {
-      title: 'Approvals',
-      dataIndex: 'approvals',
-      key: 'approvals',
-    },
-    {
-      title: 'Creation Date',
-      dataIndex: 'dateTime',
-      key: 'dateTime',
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (_, record) => (
-        <Space size="middle">
-          <a>Accept</a>
-          <a>Reject</a>
-        </Space>
-      ),
-    },
-  ];
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sydney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ];
-
-const Investor = ({ investorId }) => {
-    const [investor, setInvestor] = useState({});
-    const [top, setTop] = useState('topLeft');
-    const [bottom, setBottom] = useState('bottomRight');
+const Investor = ({ investorId, user }) => {
+  const [investor, setInvestor] = useState({});
+  const [top, setTop] = useState("topLeft");
+  const [bottom, setBottom] = useState("bottomRight");
 
   useEffect(() => {
     async function fetchInvestorData() {
@@ -181,7 +180,7 @@ const Investor = ({ investorId }) => {
         />
       </div>
     </div>
-    );
-  };
-  
-  export default Investor;
+  );
+};
+
+export default Investor;
