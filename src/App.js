@@ -50,9 +50,6 @@ function App() {
       }
     }
 
-    // token =
-    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNmM2MyZmI5ZjkzMTA3MjQ1ODczODk0In0sImlhdCI6MTY3NjkxOTU0N30.nl0mPoguEwPXuKR8i87rtPnD_1GX_FQZmdJig3Bjq3U";
-
     login();
   }, []);
 
@@ -73,6 +70,23 @@ function App() {
             className="h-full mx-auto"
             src={"https://www.svgrepo.com/download/195318/investment.svg"}
           ></img>
+        </div>
+
+        {loggedIn && (
+          <div className="p-2 space-y-1 text-gray-200 m-2">
+            <div className="text-sm border-b border-gray-600">User details</div>
+            <div className=" font-bold text-blue-300 text-xl">
+              {user.user.name}
+            </div>
+            <div>
+              Logged in as{" "}
+              <span className=" text-green-500">{user.userType}</span>
+            </div>
+          </div>
+        )}
+
+        <div className="p-2 space-y-1 text-gray-200 mx-2">
+          <div className="text-sm border-b border-gray-600">Navigation</div>
         </div>
         <Menu
           mode="inline"
@@ -96,9 +110,12 @@ function App() {
           <div className="text-3xl my-auto text-white font-bold">
             Crowd Funding Application
           </div>
-          <Button className=" bg-red-500 text-white" onClick={logout}>
-            Logout
-          </Button>
+          <div className="px-2">
+            <div></div>
+            <Button className=" bg-red-500 text-white" onClick={logout}>
+              Logout
+            </Button>
+          </div>
         </Header>
         <Content
           style={{ margin: "0px 16px 0", overflow: "initial" }}
