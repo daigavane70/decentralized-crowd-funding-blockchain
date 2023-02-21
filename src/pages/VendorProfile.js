@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Radio, Space, Table, Tag, Avatar, Button, Select, Form, Input } from "antd";
-import { Descriptions } from "antd";
+import { Space, Table, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
@@ -72,9 +71,9 @@ export default function VendorProfile() {
   const [top, setTop] = useState("topLeft");
   const [bottom, setBottom] = useState("bottomRight");
   const navigate = useNavigate();
-  
+
   const [loading, setLoading] = useState(false);
-  const [data,setData] =  useState(dummyData);
+  const [data, setData] = useState(dummyData);
 
   useEffect(() => {
     async function getData() {
@@ -88,8 +87,6 @@ export default function VendorProfile() {
     setLoading(true);
     getData();
   }, []);
-
-  
 
   return (
     <div className="manager-profile space-y-2">
