@@ -32,6 +32,7 @@ function App() {
   const [navBar, setNavBar] = useState(initialNavbarData);
 
   const [loggedIn, setLoggedIn] = useState(false);
+
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
 
