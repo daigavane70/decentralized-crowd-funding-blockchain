@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Radio,
-  Space,
-  Table,
-  Tag,
-  Avatar,
-  Button,
-  Select,
-  Form,
-  Input,
-} from "antd";
+import { Radio, Space, Table, Tag, Avatar, Button, Select, Form, Input } from "antd";
 import { Descriptions } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -18,55 +8,35 @@ import { getAllSpendingRequests } from "../config/Requests";
 
 const columns = [
   {
-    title: "Start up Name",
+    title: "Sr no",
     dataIndex: "name",
     key: "name",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: "Campaign Manager Name",
-    dataIndex: "cmname",
-    key: "cmname",
+    title: "Transaction Date",
+    dataIndex: "date",
+    key: "date",
   },
   {
-    title: "Vendor Name",
-    dataIndex: "vendorname",
-    key: "vendorname",
+    title: "Transaction Id",
+    dataIndex: "id",
+    key: "id",
   },
   {
-    title: "Spending Request Name",
+    title: "Credited By",
     dataIndex: "title",
     key: "title",
   },
   {
-    title: "Product Details",
-    dataIndex: "productDetails",
-    key: "productDetails",
-  },
-  {
-    title: "Amount to be raised",
+    title: "Amount credited",
     dataIndex: "amount",
     key: "amount",
   },
   {
-    title: "Total Amount Raised",
-    dataIndex: "tamount",
-    key: "tamount",
-  },
-  {
-    title: "Approvals",
-    dataIndex: "approvals",
-    key: "approvals",
-  },
-  {
-    title: "Creation Date",
-    dataIndex: "createdAt",
-    key: "createdAt",
-  },
-  {
-    title: "Expiry Date",
-    dataIndex: "expiryTime",
-    key: "expiryTime",
+    title: "Purpose",
+    dataIndex: "productDetails",
+    key: "productDetails",
   },
   {
     title: "Status",
@@ -98,7 +68,7 @@ const dummyData = [
   },
 ];
 
-export default function ManagerProfile() {
+export default function VendorProfile() {
   const [top, setTop] = useState("topLeft");
   const [bottom, setBottom] = useState("bottomRight");
   const navigate = useNavigate();
@@ -124,7 +94,7 @@ export default function ManagerProfile() {
   return (
     <div className="manager-profile space-y-2">
       <div className="text-4xl mb-4 font-bold border-b pb-2 text-gray-400">
-        Campaign Manager Profile
+        Vendor Profile
       </div>
       <div className="grid grid-cols-5 p-4 rounded-xl py-4 border">
         <Space wrap size={16}>
@@ -150,27 +120,6 @@ export default function ManagerProfile() {
         </div>
       </div>
       <div></div>
-      <div>
-        <Button
-          className="w-1/6 bg-blue-400 text-white"
-          onClick={() => {
-            navigate("/createSpendingRequest");
-          }}
-        >
-          Create Campaign
-        </Button>
-      </div>
-
-      <div>
-        <Button
-          className="w-1/6 bg-blue-400 text-white"
-          onClick={() => {
-            navigate("/createStartup");
-          }}
-        >
-          Create Startup
-        </Button>
-      </div>
 
       <div>
         <Table

@@ -14,9 +14,10 @@ import CreateCampaignManager from "./pages/CreateCampaignManager";
 import Welcome from "./pages/Welcome";
 import StartupDetails from "./pages/StartupDetails";
 import { loginWithToken } from "./config/Requests";
-import Vendor from "./pages/Vendor";
+import Vendor from "./pages/CreateVendor";
 import CreateStartup from "./pages/CreateStartup";
 import CreateSpendingRequest from "./pages/CreateSpendingRequest";
+import VendorProfile from "./pages/VendorProfile";
 
 function App() {
   const navigate = useNavigate();
@@ -155,6 +156,10 @@ function App() {
               path="/createStartup"
               element={<CreateStartup></CreateStartup>}
             ></Route>
+            <Route
+              path="/vendorProfile"
+              element={<VendorProfile></VendorProfile>}
+            ></Route>
           </Routes>
         </Content>
         <Footer style={{ textAlign: "center" }}>
@@ -204,6 +209,11 @@ const navBar = [
     label: "Investor Profile",
     key: "investorProfile",
     link: "/investorprofile",
+  },
+  {
+    label: "Vendor Profile",
+    key: "vendorProfile",
+    link: "/vendorProfile",
   },
   // {
   //   label: "Create campaign manager",
