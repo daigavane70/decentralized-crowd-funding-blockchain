@@ -45,7 +45,6 @@ const CreateCampaignManager = ({ setUserByToken }) => {
 
   const onFinish = (values) => {
     values = { ...values, role: USER_TYPE_IDEAPERSON };
-    console.log(values);
     async function getData() {
       try {
         const res = await createUser(values);

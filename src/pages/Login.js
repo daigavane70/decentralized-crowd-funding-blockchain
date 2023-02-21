@@ -10,12 +10,9 @@ const tailLayout = {
   },
 };
 
-const CreateInvestor = ({ setLoggedIn, loginWithToken }) => {
-  const [data, setData] = useState({});
+const Login = ({ loginWithToken }) => {
   const [loading, setLoading] = useState(false);
-  const [form] = Form.useForm();
   const formRef = React.useRef(null);
-  const { Option } = Select;
 
   const navigate = useNavigate();
 
@@ -25,10 +22,11 @@ const CreateInvestor = ({ setLoggedIn, loginWithToken }) => {
         const res = await login(values);
         console.log(res.data);
         loginWithToken(res.data.token);
-        setLoading(false);
-        setLoggedIn(true);
         navigate("/");
-      } catch (e) {}
+      } catch (e) {
+        alert("Unable to login");
+      }
+      setLoading(false);
     }
 
     setLoading(true);
@@ -87,4 +85,4 @@ const CreateInvestor = ({ setLoggedIn, loginWithToken }) => {
   );
 };
 
-export default CreateInvestor;
+export default Login;
