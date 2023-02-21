@@ -49,14 +49,6 @@ export default function CreateStartup() {
         </Form.Item>
 
         <Form.Item
-          label="Start-up Valuation"
-          name={"startupValuation"}
-          rules={[{ required: true, message: "This field is required" }]}
-        >
-          <Input></Input>
-        </Form.Item>
-
-        <Form.Item
           name="segment"
           label="Select Startup Segment"
           rules={[{ required: true }]}
@@ -88,10 +80,18 @@ export default function CreateStartup() {
             ]}
           />
         </Form.Item>
-        
+
         <Form.Item
-          label="Start-up Ceo Name"
-          name={"startupCeoName"}
+          label="Start-up Description"
+          name={"startupDescription"}
+          rules={[{ required: true, message: "This field is required" }]}
+        >
+          <Input></Input>
+        </Form.Item>
+
+        <Form.Item
+          label="Start-up Logo Image"
+          name={"startupLogo"}
           rules={[{ required: true, message: "This field is required" }]}
         >
           <Input></Input>
@@ -108,6 +108,38 @@ export default function CreateStartup() {
         <Form.Item
           label="Start-up Found In"
           name={"startupFoundIn"}
+          rules={[{ required: true, message: "This field is required" }]}
+        >
+          <Input></Input>
+        </Form.Item>
+
+        <Form.Item
+          label="Start-up Valuation"
+          name={"startupValuation"}
+          rules={[{ required: true, message: "This field is required" }]}
+        >
+          <Input></Input>
+        </Form.Item>
+        
+        <Form.Item
+          label="Start-up Ceo Name"
+          name={"startupCeoName"}
+          rules={[{ required: true, message: "This field is required" }]}
+        >
+          <Input></Input>
+        </Form.Item>
+
+        <Form.Item
+          label="Start-up Country"
+          name={"startupCountry"}
+          rules={[{ required: true, message: "This field is required" }]}
+        >
+          <Input></Input>
+        </Form.Item>
+
+        <Form.Item
+          label="Start-up Headquarters"
+          name={"startupHeadquarters"}
           rules={[{ required: true, message: "This field is required" }]}
         >
           <Input></Input>
