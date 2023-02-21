@@ -34,7 +34,7 @@ export default function CreateStartup() {
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 800 }}
-        initialValues={{ remember: true, totalAmount: "0" }}
+        initialValues={{ startupName: "ABC", segment: "Lucy", startupDescription: "New Startup", startupLogo: "link", startupSize: "60", startupFoundIn:"1999", startupValuation:"5000000", startupCeoName:"Harry", startupCountry:"India", startupHeadquarters:"Pune" }}
         onFinish={() => {}}
         onFinishFailed={() => {}}
         autoComplete="off"
