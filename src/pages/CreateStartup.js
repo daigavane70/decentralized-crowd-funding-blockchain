@@ -34,7 +34,7 @@ export default function CreateStartup() {
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 800 }}
-        initialValues={{ startupName: "ABC", segment: "Lucy", startupDescription: "New Startup", startupLogo: "link", startupSize: "60", startupFoundIn:"1999", startupValuation:"5000000", startupCeoName:"Harry", startupCountry:"India", startupHeadquarters:"Pune" }}
+        initialValues={{ name: "ABC", segment: "Lucy", description: "New Startup", image: "link", companySize: "60", foundedIn:"1999", valuation:"5000000", ceo:"Harry", country:"India", headQuarters:"Pune" }}
         onFinish={() => {}}
         onFinishFailed={() => {}}
         autoComplete="off"
@@ -42,14 +42,14 @@ export default function CreateStartup() {
       >
         <Form.Item
           label="Start-up Name"
-          name={"startupName"}
+          name={"name"}
           rules={[{ required: true, message: "This field is required" }]}
         >
           <Input></Input>
         </Form.Item>
 
         <Form.Item
-          name="segment"
+          name="category"
           label="Select Startup Segment"
           rules={[{ required: true }]}
         >
@@ -83,7 +83,7 @@ export default function CreateStartup() {
 
         <Form.Item
           label="Start-up Description"
-          name={"startupDescription"}
+          name={"description"}
           rules={[{ required: true, message: "This field is required" }]}
         >
           <Input></Input>
@@ -91,7 +91,7 @@ export default function CreateStartup() {
 
         <Form.Item
           label="Start-up Logo Image"
-          name={"startupLogo"}
+          name={"image"}
           rules={[{ required: true, message: "This field is required" }]}
         >
           <Input></Input>
@@ -99,7 +99,7 @@ export default function CreateStartup() {
 
         <Form.Item
           label="Start-up Size"
-          name={"startupSize"}
+          name={"companySize"}
           rules={[{ required: true, message: "This field is required" }]}
         >
           <Input></Input>
@@ -107,7 +107,7 @@ export default function CreateStartup() {
 
         <Form.Item
           label="Start-up Found In"
-          name={"startupFoundIn"}
+          name={"foundedIn"}
           rules={[{ required: true, message: "This field is required" }]}
         >
           <Input></Input>
@@ -115,7 +115,7 @@ export default function CreateStartup() {
 
         <Form.Item
           label="Start-up Valuation"
-          name={"startupValuation"}
+          name={"valuation"}
           rules={[{ required: true, message: "This field is required" }]}
         >
           <Input></Input>
@@ -123,7 +123,7 @@ export default function CreateStartup() {
         
         <Form.Item
           label="Start-up Ceo Name"
-          name={"startupCeoName"}
+          name={"ceo"}
           rules={[{ required: true, message: "This field is required" }]}
         >
           <Input></Input>
@@ -131,7 +131,7 @@ export default function CreateStartup() {
 
         <Form.Item
           label="Start-up Country"
-          name={"startupCountry"}
+          name={"country"}
           rules={[{ required: true, message: "This field is required" }]}
         >
           <Input></Input>
@@ -139,7 +139,7 @@ export default function CreateStartup() {
 
         <Form.Item
           label="Start-up Headquarters"
-          name={"startupHeadquarters"}
+          name={"headQuarters"}
           rules={[{ required: true, message: "This field is required" }]}
         >
           <Input></Input>
