@@ -18,35 +18,18 @@ import Vendor from "./pages/CreateVendor";
 import CreateStartup from "./pages/CreateStartup";
 import CreateSpendingRequest from "./pages/CreateSpendingRequest";
 import VendorProfile from "./pages/VendorProfile";
+import {
+  USER_TYPE_IDEAPERSON,
+  USER_TYPE_INVESTOR,
+  USER_TYPE_VENDOR,
+} from "./config/Constants";
 
 function App() {
   const navigate = useNavigate();
 
   const tokenKey = "auth-token-34";
 
-  const navBar = [
-    {
-      label: "Home",
-      key: "home",
-      link: "/",
-    },
-    { label: "My Investments", key: "mystartups", link: "/mystartups" },
-    {
-      label: "Manager profile",
-      key: "managerProfile",
-      link: "/managerProfile",
-    },
-    {
-      label: "Investor Profile",
-      key: "investorProfile",
-      link: "/investorprofile",
-    },
-    {
-      label: "Vendor Profile",
-      key: "vendorProfile",
-      link: "/vendorProfile",
-    },
-  ];
+  const [navBar, setNavBar] = useState(initialNavbarData);
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
@@ -76,6 +59,42 @@ function App() {
     let token = localStorage.getItem(tokenKey);
     if (token) setUserByToken(token);
   }, []);
+
+  useEffect(() => {
+    if (loggedIn) {
+      if (user.userType == USER_TYPE_INVESTOR) {
+        setNavBar([
+          ...navBar,
+          {
+            label: "Investor Profile",
+            key: "investorProfile",
+            link: "/investorprofile",
+          },
+          { label: "My Investments", key: "mystartups", link: "/mystartups" },
+        ]);
+      } else if (user.userType == USER_TYPE_IDEAPERSON) {
+        setNavBar([
+          ...navBar,
+          {
+            label: "Manager profile",
+            key: "managerProfile",
+            link: "/managerProfile",
+          },
+        ]);
+      } else if (user.userType == USER_TYPE_VENDOR) {
+        setNavBar([
+          ...navBar,
+          {
+            label: "Vendor Profile",
+            key: "vendorProfile",
+            link: "/vendorProfile",
+          },
+        ]);
+      }
+    } else {
+      setNavBar(initialNavbarData);
+    }
+  }, [loggedIn]);
 
   return (
     <Spin spinning={loading}>
@@ -228,3 +247,11 @@ function App() {
 }
 
 export default App;
+
+const initialNavbarData = [
+  {
+    label: "Home",
+    key: "home",
+    link: "/",
+  },
+];
