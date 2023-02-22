@@ -127,6 +127,24 @@ export default function ManagerProfile() {
       <div className="text-4xl mb-4 font-bold border-b pb-2 text-gray-400">
         Campaign Manager Profile
       </div>
+      <div className=" text-right space-x-4">
+        <Button
+          className="w-1/6 bg-blue-400 text-white"
+          onClick={() => {
+            navigate("/createSpendingRequest");
+          }}
+        >
+          Create Campaign
+        </Button>
+        <Button
+          className="w-1/6 bg-blue-400 text-white"
+          onClick={() => {
+            navigate("/createStartup");
+          }}
+        >
+          Create Startup
+        </Button>
+      </div>
       <div className="grid grid-cols-5 p-4 rounded-xl py-4 border">
         <Space wrap size={16}>
           <Avatar size={64} icon={<UserOutlined />} />
@@ -150,29 +168,6 @@ export default function ManagerProfile() {
           </div>
         </div>
       </div>
-      <div></div>
-      <div>
-        <Button
-          className="w-1/6 bg-blue-400 text-white"
-          onClick={() => {
-            navigate("/createSpendingRequest");
-          }}
-        >
-          Create Campaign
-        </Button>
-      </div>
-
-      <div>
-        <Button
-          className="w-1/6 bg-blue-400 text-white"
-          onClick={() => {
-            navigate("/createStartup");
-          }}
-        >
-          Create Startup
-        </Button>
-      </div>
-
       <div>
         <Table
           loading={loading}
