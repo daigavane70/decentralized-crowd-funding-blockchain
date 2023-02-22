@@ -44,9 +44,7 @@ function App() {
       setLoggedIn(true);
       localStorage.setItem(tokenKey, token);
       navigate("/");
-    } catch (e) {
-      alert("Unable to login");
-    }
+    } catch (e) {}
     setLoading(false);
   };
 

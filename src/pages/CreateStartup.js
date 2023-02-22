@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Select,
-  Form,
-  Input,
-} from "antd";
+import { Button, Select, Form, Input } from "antd";
 import "../App.css";
+import { createStartup } from "../config/Requests";
+import { useNavigate } from "react-router-dom";
 
 const tailLayout = {
   wrapperCol: {
@@ -14,11 +11,22 @@ const tailLayout = {
   },
 };
 
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
-
 export default function CreateStartup() {
+  const navigate = useNavigate();
+
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
+
+  const handleSubmit = async (values) => {
+    try {
+      const res = await createStartup(values);
+      navigate("/managerProfile");
+    } catch (e) {
+      alert("Unable to create startup");
+    }
+  };
+
   const formRef = React.useRef(null);
   return (
     <div className="mb-4">
@@ -34,8 +42,19 @@ export default function CreateStartup() {
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 800 }}
-        initialValues={{ name: "ABC", segment: "Lucy", description: "New Startup", image: "link", companySize: "60", foundedIn:"1999", valuation:"5000000", ceo:"Harry", country:"India", headQuarters:"Pune" }}
-        onFinish={() => {}}
+        initialValues={{
+          name: "ABC",
+          segment: "EDTECH",
+          description: "New Startup",
+          image: "link",
+          companySize: "60",
+          foundedIn: "1999",
+          valuation: "5000000",
+          ceo: "Harry",
+          country: "India",
+          headQuarters: "Pune",
+        }}
+        onFinish={handleSubmit}
         onFinishFailed={() => {}}
         autoComplete="off"
         ref={formRef}
@@ -61,21 +80,24 @@ export default function CreateStartup() {
             onChange={handleChange}
             options={[
               {
-                value: "jack",
-                label: "Jack",
+                key: "EDTECH",
+                value: "EDTECH",
               },
               {
-                value: "lucy",
-                label: "Lucy",
+                key: "FINTECH",
+                value: "FINTECH",
               },
               {
-                value: "Yiminghe",
-                label: "yiminghe",
+                key: "LIFESTYLE",
+                value: "LIFESTYLE",
               },
               {
-                value: "disabled",
-                label: "Disabled",
-                disabled: true,
+                key: "SOCIAL",
+                value: "SOCIAL",
+              },
+              {
+                key: "n/a",
+                value: "n/a",
               },
             ]}
           />
@@ -120,7 +142,7 @@ export default function CreateStartup() {
         >
           <Input></Input>
         </Form.Item>
-        
+
         <Form.Item
           label="Start-up Ceo Name"
           name={"ceo"}

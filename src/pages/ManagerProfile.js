@@ -14,7 +14,10 @@ import { Descriptions } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
-import { getAllSpendingRequests } from "../config/Requests";
+import {
+  getAllSpendingRequests,
+  getAllSpendingRequestsForManager,
+} from "../config/Requests";
 
 const columns = [
   {
@@ -102,14 +105,14 @@ export default function ManagerProfile() {
   const [top, setTop] = useState("topLeft");
   const [bottom, setBottom] = useState("bottomRight");
   const navigate = useNavigate();
-  
+
   const [loading, setLoading] = useState(false);
-  const [data,setData] =  useState(dummyData);
+  const [data, setData] = useState(dummyData);
 
   useEffect(() => {
     async function getData() {
       try {
-        const res = await getAllSpendingRequests();
+        const res = await getAllSpendingRequestsForManager();
         setData(res.data);
         setLoading(false);
       } catch (e) {}
@@ -118,8 +121,6 @@ export default function ManagerProfile() {
     setLoading(true);
     getData();
   }, []);
-
-  
 
   return (
     <div className="manager-profile space-y-2">

@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  Radio,
-  Space,
-  Table,
-  Tag,
-  Avatar,
-  Button,
-  Select,
-  Form,
-  Input,
-} from "antd";
-import { Descriptions } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { Button, Select, Form, Input, Spin } from "antd";
 import "../App.css";
+import {
+  createSpendingRequest,
+  getStartupsForManager,
+} from "../config/Requests";
+import { useNavigate } from "react-router-dom";
 
 const tailLayout = {
   wrapperCol: {
@@ -27,74 +19,105 @@ const handleChange = (value) => {
 };
 
 export default function CreateSpendingRequest() {
+  const [startups, setStartups] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getData() {
+      const res = await getStartupsForManager();
+      setStartups(res.data);
+      setLoading(false);
+    }
+    setLoading();
+    getData();
+  }, []);
+
+  const handleSubmit = async (values) => {
+    setLoading(true);
+    console.log(values);
+    const res = await createSpendingRequest(values);
+    console.log(res.data);
+    setLoading(false);
+    navigate("/managerProfile");
+  };
+
   const formRef = React.useRef(null);
   return (
-    <div className="mb-4">
-      <div className="investor-profile space-y-3">
-        <div className="text-4xl mb-4 font-bold border-b pb-2 text-gray-400">
-          Create new spending request
+    <Spin spinning={loading}>
+      <div className="mb-4">
+        <div className="investor-profile space-y-3">
+          <div className="text-4xl mb-4 font-bold border-b pb-2 text-gray-400">
+            Create new spending request
+          </div>
         </div>
-      </div>
-      <Form
-        className="w-[1500px] mx-auto border p-4 py-8 bg-gray-50 rounded-lg pb-2"
-        title="Enter campaign manager details"
-        name="basic"
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 800 }}
-        initialValues={{ remember: true, totalAmount: "0" }}
-        onFinish={() => {}}
-        onFinishFailed={() => {}}
-        autoComplete="off"
-        ref={formRef}
-      >
-        <Form.Item
-          name="startup"
-          label="Select Startup"
-          rules={[{ required: true }]}
+        <Form
+          className="w-[1500px] mx-auto border p-4 py-8 bg-gray-50 rounded-lg pb-2"
+          title="Enter campaign manager details"
+          name="basic"
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 16 }}
+          style={{ maxWidth: 800 }}
+          initialValues={{
+            remember: true,
+            amount: 10,
+            title: "Example spending request",
+            productDetails: "sample description",
+          }}
+          onFinish={handleSubmit}
+          onFinishFailed={() => {}}
+          autoComplete="off"
+          ref={formRef}
         >
-          <Select
-            defaultValue="select"
-            style={{
-              width: 120,
-            }}
-            onChange={handleChange}
-            options={[
-              {
-                value: "jack",
-                label: "Jack",
-              },
-              {
-                value: "lucy",
-                label: "Lucy",
-              },
-              {
-                value: "Yiminghe",
-                label: "yiminghe",
-              },
-              {
-                value: "disabled",
-                label: "Disabled",
-                disabled: true,
-              },
-            ]}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Amount to be raised: "
-          name={"totalAmount"}
-          rules={[{ required: true, message: "This field is required" }]}
-        >
-          <Input></Input>
-        </Form.Item>
+          <Form.Item
+            name="startupId"
+            label="Select Startup"
+            rules={[{ required: true }]}
+          >
+            <Select
+              defaultValue="select"
+              style={{
+                width: 120,
+              }}
+              onChange={handleChange}
+              options={startups.map((startup) => {
+                return {
+                  value: startup._id,
+                  label: startup.name,
+                };
+              })}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Title:  "
+            name={"title"}
+            rules={[{ required: true, message: "This field is required" }]}
+          >
+            <Input></Input>
+          </Form.Item>
+          <Form.Item
+            label="Product details: "
+            name={"productDetails"}
+            rules={[{ required: true, message: "This field is required" }]}
+          >
+            <Input></Input>
+          </Form.Item>
+          <Form.Item
+            label="Amount to be raised (in $): "
+            name={"amount"}
+            rules={[{ required: true, message: "This field is required" }]}
+          >
+            <Input></Input>
+          </Form.Item>
 
-        <Form.Item {...tailLayout} className="space-x-4">
-          <Button className=" bg-blue-500 text-white mr-2" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-      <div></div>
-    </div>
+          <Form.Item {...tailLayout} className="space-x-4">
+            <Button className=" bg-blue-500 text-white mr-2" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+        <div></div>
+      </div>
+    </Spin>
   );
 }
