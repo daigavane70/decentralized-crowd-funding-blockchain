@@ -175,7 +175,7 @@ function App() {
                 <Route path="/" element={<Home></Home>}></Route>
                 <Route
                   path="/managerProfile"
-                  element={<ManagerProfile></ManagerProfile>}
+                  element={<ManagerProfile user={user}></ManagerProfile>}
                 ></Route>
                 <Route
                   path="/mystartups"
@@ -188,10 +188,6 @@ function App() {
                 <Route
                   path="/startups/:id"
                   element={<StartupDetails></StartupDetails>}
-                ></Route>
-                <Route
-                  path="/createSpendingRequest"
-                  element={<CreateSpendingRequest></CreateSpendingRequest>}
                 ></Route>
                 <Route
                   path="/createSpendingRequest"
