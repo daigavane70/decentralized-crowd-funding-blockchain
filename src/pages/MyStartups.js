@@ -11,15 +11,19 @@ import {
 } from "recharts";
 import { getInvestmentsById } from "../config/Requests";
 
-export default function MyStartups() {
+export default function MyStartups({user}) {
   const [loading, setLoading] = useState(false);
   const [data,setData] =  useState(dummyData);
+
+  const userId = user.details._id;
+  // console.log(user.details);
 
   useEffect(() => {
     async function getData() {
       try {
-        const res = await getInvestmentsById();
+        const res = await getInvestmentsById(userId);
         setData(res.data);
+        // console.log(res.data);
         setLoading(false);
       } catch (e) {}
     }
@@ -44,24 +48,24 @@ export default function MyStartups() {
       </ResponsiveContainer>
       <Divider orientation="left">My Investments</Divider>
       <div className="grid grid-cols-3 gap-2">
-        {investments.map((investment) => {
+        {data && data.map((investment) => {
           return (
             <Card
               title={<div className=" text-cyan-500">{investment.title}</div>}
             >
               <div className="text-sm font-light">
                 <div className="flex justify-between">
-                  <div className="text-gray-400">Invested: </div>
-                  <div>{investment.valuation}</div>
+                  <div className="text-gray-400">Invested Amount: </div>
+                  <div>{investment.amount}</div>
                 </div>
                 <div className="flex justify-between">
                   <div className="text-gray-400">Current Valuation: </div>
-                  <div>{investment.valuation * 7}</div>
+                  {/* <div>{investment.valuation * 7}</div> */}
                 </div>
                 <div className="flex justify-between">
                   <div className="text-gray-400">Sector: </div>
                   <Tag className={`m-0 bg-red-200`}>
-                    <div>{investment.Domain}</div>
+                    <div>{investment.startup}</div>
                   </Tag>
                 </div>
               </div>
