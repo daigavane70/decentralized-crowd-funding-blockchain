@@ -199,7 +199,7 @@ function App() {
                 ></Route>
                 <Route
                   path="/vendorProfile"
-                  element={<VendorProfile></VendorProfile>}
+                  element={<VendorProfile user={user}></VendorProfile>}
                 ></Route>
               </Routes>
             </Content>
