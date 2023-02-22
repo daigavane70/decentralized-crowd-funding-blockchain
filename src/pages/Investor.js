@@ -123,12 +123,20 @@ const data = [
   },
 ];
 
+const calculatetotalinvestment = (data) =>{
+  let sum =0;
+  data.forEach(element => {
+    sum+=element.amount;
+  });
+  return sum;
+}
 const Investor = ({ investorId, user }) => {
   const [investor, setInvestor] = useState({});
   const [top, setTop] = useState("topLeft");
   const [bottom, setBottom] = useState("bottomRight");
 
   useEffect(() => {
+    console.log(user)
     async function fetchInvestorData() {
       // Make an API call to retrieve investor data based on the investorId
       const response = await fetch(`/api/investors/${investorId}`);
@@ -150,23 +158,25 @@ const Investor = ({ investorId, user }) => {
         <div className="grid grid-cols-3 col-span-4">
           <div className="flex space-x-3">
             <div className=" text-slate-500">Name: </div>
-            <div className=" font-bold">Bhavana Bafna</div>
+            <div className=" font-bold">{user.user.name}</div>
           </div>
           <div className="flex space-x-3">
             <div className=" text-slate-500">Email: </div>
-            <div className=" font-bold">bhavnaabafna.bb@gmail.com</div>
+            <div className=" font-bold">{user.user.email}</div>
           </div>
           <div className="flex space-x-3">
             <div className=" text-slate-500">Mobile: </div>
-            <div className=" font-bold">9823889479</div>
+            <div className=" font-bold">{user.user.mobile || "NA"}</div>
           </div>
           <div className="flex space-x-3">
             <div className=" text-slate-500">Total Investments: </div>
-            <div className=" font-bold">21</div>
+            <div className=" font-bold">{user.details.investments.length}</div>
           </div>
           <div className="flex space-x-3">
             <div className=" text-slate-500">Amount invested: </div>
-            <div className=" font-bold">$ 450,000</div>
+            <div className=" font-bold">{
+              user.details.investments.length > 0 ? calculatetotalinvestment(data) : 0 
+            }</div>
           </div>
         </div>
       </div>

@@ -101,7 +101,7 @@ const dummyData = [
   },
 ];
 
-export default function ManagerProfile() {
+export default function ManagerProfile({user}) {
   const [top, setTop] = useState("topLeft");
   const [bottom, setBottom] = useState("bottomRight");
   const navigate = useNavigate();
@@ -134,19 +134,19 @@ export default function ManagerProfile() {
         <div className="grid grid-cols-3 col-span-4">
           <div className="flex space-x-3">
             <div className=" text-slate-500">Name: </div>
-            <div className=" font-bold">Bhavana Bafna</div>
+            <div className=" font-bold">{user.user.name}</div>
           </div>
           <div className="flex space-x-3">
             <div className=" text-slate-500">Email: </div>
-            <div className=" font-bold">bhavnaabafna.bb@gmail.com</div>
+            <div className=" font-bold">{user.user.email}</div>
           </div>
           <div className="flex space-x-3">
             <div className=" text-slate-500">Mobile: </div>
-            <div className=" font-bold">9823889479</div>
+            <div className=" font-bold">{user.user.mobile || "NA"}</div>
           </div>
           <div className="flex space-x-3">
             <div className=" text-slate-500">Total Campaingns managed: </div>
-            <div className=" font-bold">21</div>
+            <div className=" font-bold">{data.length}</div>
           </div>
         </div>
       </div>
@@ -158,7 +158,7 @@ export default function ManagerProfile() {
             navigate("/createSpendingRequest");
           }}
         >
-          Create Campaign
+          Create Spending Request
         </Button>
       </div>
 
