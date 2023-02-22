@@ -35,6 +35,9 @@ export const createSpendingRequest = (data) =>
       Authorization: localStorage.getItem(tokenKey),
     },
   });
+
+export const getSpendingRequestForStartups = (startupId) =>
+  backend.get("/spendingrequest/byStartup/" + startupId);
 export const login = (data) => backend.post("/users/login", data);
 export const loginWithToken = (token) =>
   backend.get("/users/profile", {
