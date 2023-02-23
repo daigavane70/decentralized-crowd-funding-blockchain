@@ -12,5 +12,9 @@ export const tailLayout = {
 };
 
 export const formatDate = (date) => {
-  return moment(date).format("hh:mm, Do MMM");
+  return moment(date).format("hh:mm:ss , Do MMM");
+};
+
+export const formatDateWithYear = (date) => {
+  return moment(date).format("HH:mm:SS , Do MMM YYYY");
 };

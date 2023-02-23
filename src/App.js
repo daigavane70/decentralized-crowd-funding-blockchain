@@ -165,7 +165,7 @@ function App() {
             </Header>
             <Content
               style={{ margin: "0px 16px 0", overflow: "initial" }}
-              className="pb-12 h-screen"
+              className="pb-12"
             >
               <div
                 className="site-layout-background"
@@ -203,10 +203,10 @@ function App() {
                 ></Route>
               </Routes>
             </Content>
-            <Footer style={{ textAlign: "center" }}>
+            {/* <Footer style={{ textAlign: "center" }}>
               Decentralized crowd funding and fraud prevention application using
               Blockchain
-            </Footer>
+            </Footer> */}
           </Layout>
         </Layout>
       ) : (

@@ -44,7 +44,7 @@ const Login = ({ loginWithToken }) => {
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 600 }}
         initialValues={{
-          email: "iamalbert@gmai.com",
+          email: "investor@gmail.com",
           password: "password123",
         }}
         onFinish={onFinish}

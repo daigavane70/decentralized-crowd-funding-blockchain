@@ -1,156 +1,99 @@
 import React, { useState, useEffect } from "react";
-import { Radio, Space, Table, Tag, Avatar } from "antd";
+import { Radio, Space, Table, Tag, Avatar, Divider, Spin, Button } from "antd";
 import { Descriptions } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { getSpendingRequestForInvestor } from "../config/Requests";
+import { formatDateWithYear } from "../config/Constants";
 
-const topOptions = [
-  {
-    label: "topLeft",
-    value: "topLeft",
-  },
-  {
-    label: "topCenter",
-    value: "topCenter",
-  },
-  {
-    label: "topRight",
-    value: "topRight",
-  },
-  {
-    label: "none",
-    value: "none",
-  },
-];
-const bottomOptions = [
-  {
-    label: "bottomLeft",
-    value: "bottomLeft",
-  },
-  {
-    label: "bottomCenter",
-    value: "bottomCenter",
-  },
-  {
-    label: "bottomRight",
-    value: "bottomRight",
-  },
-  {
-    label: "none",
-    value: "none",
-  },
-];
-
-const columns = [
-  {
-    title: "Sr no.",
-    dataIndex: "srno",
-    key: "srno",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Start up Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Campaign Manager Name",
-    dataIndex: "cmname",
-    key: "cmname",
-  },
-  {
-    title: "Vendor Name",
-    dataIndex: "vendorname",
-    key: "vendorname",
-  },
-  {
-    title: "Amount to be raised",
-    dataIndex: "amount",
-    key: "amount",
-  },
-  {
-    title: "Total Amount Raised",
-    dataIndex: "tamount",
-    key: "tamount",
-  },
-  {
-    title: "Approvals",
-    dataIndex: "approvals",
-    key: "approvals",
-  },
-  {
-    title: "Creation Date",
-    dataIndex: "dateTime",
-    key: "dateTime",
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Accept</a>
-        <a>Reject</a>
-      </Space>
-    ),
-  },
-];
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-];
-
-const calculatetotalinvestment = (data) =>{
-  let sum =0;
-  data.forEach(element => {
-    sum+=element.amount;
+const calculatetotalinvestment = (data) => {
+  let sum = 0;
+  data.forEach((element) => {
+    sum += element.amount;
   });
   return sum;
-}
+};
 const Investor = ({ investorId, user }) => {
-  const [investor, setInvestor] = useState({});
-  const [top, setTop] = useState("topLeft");
-  const [bottom, setBottom] = useState("bottomRight");
+  const [spendingRequests, setSpendingRequests] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log(user)
-    async function fetchInvestorData() {
-      // Make an API call to retrieve investor data based on the investorId
-      const response = await fetch(`/api/investors/${investorId}`);
-      const data = await response.json();
-      setInvestor(data);
+    async function getSpendingRequests() {
+      const res = await getSpendingRequestForInvestor();
+      setLoading(false);
+      setSpendingRequests(res.data);
     }
-    fetchInvestorData();
+    setLoading(true);
+    getSpendingRequests();
   }, [investorId]);
+
+  const columns = [
+    {
+      title: "Sr no.",
+      dataIndex: "srNo",
+      key: "srno",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Start up Name",
+      dataIndex: "startupName",
+      key: "startupName",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Campaign Manager Name",
+      dataIndex: "cmName",
+      key: "cmName",
+    },
+    {
+      title: "Vendor Name",
+      dataIndex: "vName",
+      key: "vName",
+    },
+    {
+      title: "Amount to be raised",
+      dataIndex: "amount",
+      key: "amount",
+    },
+    {
+      title: "Total Amount Raised",
+      dataIndex: "tamount",
+      key: "tamount",
+    },
+    {
+      title: "Approvals",
+      dataIndex: "approvals",
+      key: "approvals",
+    },
+    {
+      title: "Creation Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (date) => formatDateWithYear(date),
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <Button className="bg-cyan-500 text-white">Accept</Button>
+          <Button className="bg-red-400 text-white">Reject</Button>
+        </Space>
+      ),
+    },
+  ];
 
   return (
     <div className="investor-profile space-y-3">
-      <div className="text-4xl mb-4 font-bold border-b pb-2 text-gray-400">
-        Investor Profile
-      </div>
+      <Divider orientation="left">
+        <div className="text-cyan-600/60 text-5xl font-bold">
+          Investor Profile
+        </div>
+      </Divider>
       <div className="grid grid-cols-5 p-4 rounded-xl py-4 border">
         <Space wrap size={16}>
           <Avatar size={64} icon={<UserOutlined />} />
@@ -174,19 +117,22 @@ const Investor = ({ investorId, user }) => {
           </div>
           <div className="flex space-x-3">
             <div className=" text-slate-500">Amount invested: </div>
-            <div className=" font-bold">{
-              user.details.investments.length > 0 ? calculatetotalinvestment(data) : 0 
-            }</div>
+            <div className=" font-bold">
+              {user.details.investments.length > 0
+                ? calculatetotalinvestment(spendingRequests)
+                : 0}
+            </div>
           </div>
         </div>
       </div>
       <div>
         <Table
+          loading={loading}
           columns={columns}
           pagination={{
-            position: [bottom],
+            position: ["bottomRight"],
           }}
-          dataSource={data}
+          dataSource={spendingRequests}
         />
       </div>
     </div>

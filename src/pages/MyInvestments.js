@@ -1,4 +1,4 @@
-import { Card, Divider, Tag, Tooltip } from "antd";
+import { Card, Divider, Table, Tag, Tooltip } from "antd";
 import React, { useState, useEffect } from "react";
 import {
   CartesianGrid,
@@ -35,7 +35,11 @@ export default function MyInvestments() {
 
   return (
     <div>
-      <Divider orientation="left">Portfolio graph</Divider>
+      <Divider orientation="left">
+        <div className="text-cyan-600/60 text-5xl font-bold">
+          Investment Statastics
+        </div>
+      </Divider>
       <ResponsiveContainer width={"100%"} height={250}>
         <LineChart data={investments} className="mx-auto">
           <CartesianGrid strokeDasharray="3 3" />
@@ -47,78 +51,54 @@ export default function MyInvestments() {
           {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
         </LineChart>
       </ResponsiveContainer>
-      <Divider orientation="left">My Investments</Divider>
-      <div className="grid grid-cols-3 gap-2">
-        {investments.map((investment) => {
-          return (
-            <Card
-              title={<div className=" text-cyan-500">{investment.title}</div>}
-            >
-              <div className="text-sm font-light">
-                <div className="flex justify-between">
-                  <div className="text-gray-400">Invested: </div>
-                  <div>{investment.amount}</div>
-                </div>
-                <div className="flex justify-between">
-                  <div className="text-gray-400">Current Valuation: </div>
-                  <div>{investment.valuation * 7}</div>
-                </div>
-                <div className="flex justify-between">
-                  <div className="text-gray-400">Sector: </div>
-                  <Tag className={`m-0 bg-red-200`}>
-                    <div>{investment.sector}</div>
-                  </Tag>
-                </div>
-              </div>
-            </Card>
-          );
-        })}
-      </div>
+      <Divider orientation="left">
+        <div className="text-cyan-600 text-2xl">Investments</div>
+      </Divider>
+      <Table
+        columns={columns}
+        pagination={{
+          position: ["bottomRight"],
+        }}
+        dataSource={investments}
+      />
     </div>
   );
 }
 
-const dummyData = [
+const columns = [
   {
-    name: "Jan",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
+    title: "Sr no.",
+    dataIndex: "sr",
+    key: "sr",
+    render: (i) => i + ".",
   },
   {
-    name: "Feb",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
+    title: "Logo",
+    dataIndex: "logo",
+    key: "logo",
+    render: (src) => <img className="h-[50px] rounded-full" src={src}></img>,
   },
   {
-    name: "March",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
+    title: "Startup",
+    dataIndex: "startupName",
+    key: "startupName",
+    render: (name) => <div className=" font-bold text-black/60">{name}</div>,
   },
   {
-    name: "August",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
+    title: "Sector",
+    dataIndex: "sector",
+    key: "sector",
+    render: (text) => <Tag className={`m-0 bg-green-200`}>{text}</Tag>,
   },
   {
-    name: "Sept",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
+    title: "Invested (in $)",
+    dataIndex: "amount",
+    key: "amount",
+    render: (text) => "$ " + text + ".00",
   },
   {
-    name: "Oct",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Dec",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
+    title: "Date & Time",
+    dataIndex: "createdAt",
+    key: "createdAt",
   },
 ];

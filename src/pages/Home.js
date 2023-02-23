@@ -42,8 +42,8 @@ export default function Home() {
   return (
     <div className="">
       <Card>
-        <Divider>
-          <div className="text-3xl">Welcome</div>
+        <Divider orientation="center">
+          <div className="text-cyan-600/60 text-5xl font-bold">Welcome</div>
         </Divider>
         <p>
           This is an open platform for crowdfunding campaigns. You can launch a

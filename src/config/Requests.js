@@ -31,7 +31,11 @@ export const getSpendingRequestForStartups = (startupId) =>
   backend.get("/spendingrequest/byStartup/" + startupId);
 export const login = (data) => backend.post("/users/login", data);
 export const loginWithToken = (token) =>
-  backend.get("/users/profile", authHeaders);
+  backend.get("/users/profile", {
+    headers: {
+      Authorization: token,
+    },
+  });
 
 export const invest = (data) =>
   backend.post(
@@ -39,3 +43,5 @@ export const invest = (data) =>
     data,
     authHeaders
   );
+export const getSpendingRequestForInvestor = () =>
+  backend.get("/spendingrequest/byInvestor", authHeaders);
