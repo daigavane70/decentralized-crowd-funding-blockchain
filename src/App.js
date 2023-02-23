@@ -179,7 +179,7 @@ function App() {
                 ></Route>
                 <Route
                   path="/mystartups"
-                  element={<MyStartups></MyStartups>}
+                  element={<MyStartups user={user}></MyStartups>}
                 ></Route>
                 <Route
                   path="/investorprofile"
