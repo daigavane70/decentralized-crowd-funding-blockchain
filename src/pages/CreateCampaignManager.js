@@ -1,14 +1,7 @@
 import { Button, Form, Input, Select } from "antd";
 import React, { useState } from "react";
-import { USER_TYPE_IDEAPERSON } from "../config/Constants";
+import { tailLayout, USER_TYPE_IDEAPERSON } from "../config/Constants";
 import { createUser } from "../config/Requests";
-
-const tailLayout = {
-  wrapperCol: {
-    offset: 4,
-    span: 16,
-  },
-};
 
 const CreateCampaignManager = ({ setUserByToken }) => {
   const [data, setData] = useState({});

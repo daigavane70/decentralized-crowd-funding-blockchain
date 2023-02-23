@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import ManagerProfile from "./pages/ManagerProfile";
-import MyStartups from "./pages/MyStartups";
+import MyStartups from "./pages/MyInvestments";
 import Investor from "./pages/Investor";
 import Login from "./pages/Login";
 import CreateInvestor from "./pages/CreateInvestorProfile";
@@ -63,7 +63,7 @@ function App() {
     if (loggedIn) {
       if (user.userType == USER_TYPE_INVESTOR) {
         setNavBar([
-          ...navBar,
+          ...initialNavbarData,
           {
             label: "Investor Profile",
             key: "investorProfile",
@@ -73,7 +73,7 @@ function App() {
         ]);
       } else if (user.userType == USER_TYPE_IDEAPERSON) {
         setNavBar([
-          ...navBar,
+          ...initialNavbarData,
           {
             label: "Manager profile",
             key: "managerProfile",
@@ -82,7 +82,7 @@ function App() {
         ]);
       } else if (user.userType == USER_TYPE_VENDOR) {
         setNavBar([
-          ...navBar,
+          ...initialNavbarData,
           {
             label: "Vendor Profile",
             key: "vendorProfile",
